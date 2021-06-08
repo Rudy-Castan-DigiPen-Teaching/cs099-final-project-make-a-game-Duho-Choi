@@ -3,18 +3,21 @@
 // Course     : CS099
 // Spring 2021
 
+let current_screen = 0;
+
 const main_menu = 0;
 const game_screen = 1;
 const help_screen = 2;
-const options_screen = 11;
-const credits_screen = 12;
-
-let current_screen = 0;
+const options_screen = 10;
+const credits_screen = 11;
 
 let start_button;
+let play_button;
 let options_button;
 let credits_button;
 let main_button;
+
+let player_camera;
 
 let player;
 let player_laser = [];
@@ -34,9 +37,13 @@ function setup()
 
     // buttons
     start_button = new button(width/2, height/2 + 100, 300, 60);
+    play_button = new button(width/2, height/11, 300, 60);
     options_button = new button(width/2, height/2 + 200, 300, 60);
     credits_button = new button(width/2, height/2 + 300, 300, 60);
     main_button = new button(width/13,height/12,50,50);
+
+    // camera
+    player_camera = new Camera();
 
     // player & enemies
     player = new spaceship(width/2, height/2, 0);
@@ -48,7 +55,9 @@ function draw()
     background( 20 );
     switch(current_screen)
     {
+        // main menu
         case main_menu:
+
             // draw buttons
             start_button.draw('START');
             options_button.draw('OPTIONS');
@@ -69,25 +78,38 @@ function draw()
             }
 
             break;
+
+        // help screen
         case help_screen:
 
+            // game play button
+            play_button.draw('Let\'s go!');
+            if(play_button.clicked())
+            {
+                current_screen = game_screen;
+            }
+
             break;
+
+        // options screen
         case options_screen:
 
             break;
+
+        // credits screen
         case credits_screen:
 
             break;
+
+        // game screen
         case game_screen:
+
             player.update();
             player.draw();
 
             if(keyIsDown(32))
             {
-                if(((floor(millis()/10) - shoot_timer) % 20 == 0) && do_not_shoot == false)
-                {
-                player_laser.push(new laser(player));
-                }
+                
             }
             else
             {
@@ -95,12 +117,12 @@ function draw()
             }
             
             // player lasers update
-            for(let bullet of player_laser)
+            for(let lasers of player_laser)
             {
-                bullet.update();
+                lasers.update();
             }
             
-            
+            // if laser out from screen, delete laser
             for(let i = player_laser.length - 1; i >= 0; --i)
             {
                 let particle = player_laser[i]
