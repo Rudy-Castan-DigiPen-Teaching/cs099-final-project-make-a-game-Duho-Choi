@@ -22,9 +22,7 @@ let player_camera;
 let player;
 let player_laser = [];
 
-let timer = 0;
-let shoot_timer;
-let do_not_shoot = false;
+let blast_interval;
 
 function preload()
 {
@@ -47,7 +45,6 @@ function setup()
 
     // player & enemies
     player = new spaceship(width/2, height/2, 0);
-    
 }
 
 function draw()
@@ -106,15 +103,6 @@ function draw()
 
             player.update();
             player.draw();
-
-            if(keyIsDown(32))
-            {
-                
-            }
-            else
-            {
-                
-            }
             
             // player lasers update
             for(let lasers of player_laser)
@@ -133,9 +121,9 @@ function draw()
                 }
             }
             break;
-
     }
-
+    
+    // if current screen is not main menu and game screen, make main button
     if(current_screen != main_menu && current_screen != game_screen)
     {
         main_button.draw('◁');
@@ -146,10 +134,25 @@ function draw()
     }
 }
 
+function blast_laser()
+{
+    player_laser.push(new laser(player));
+}
+
 function keyPressed()
+{
+    let fireRate = 1000 / player.fireRate;
+    if(keyCode == 32)
+    {
+        setTimeout(blast_laser,0);
+        blast_interval = setInterval(blast_laser,fireRate);
+    }
+}
+
+function keyReleased()
 {
     if(keyCode == 32)
     {
-        shoot_timer = floor(millis()/10);
+        clearInterval(blast_interval);
     }
 }

@@ -10,7 +10,7 @@ class laser
         this.position = new Vec2(shooter.position.x,shooter.position.y);
         this.velocity = new Vec2(shooter.velocity.x,shooter.velocity.y);
         this.team = shooter.team;
-        this.bullet_spd = 6;
+        this.bullet_spd = 8;
     }
 
     update()
@@ -25,7 +25,7 @@ class laser
         strokeWeight(2);
         line(this.position.x,this.position.y,this.position.x + this.velocity.x * 4,this.position.y + this.velocity.y * 4);
         strokeWeight(10);
-        stroke(220);
+        noStroke();
         point(this.position.x + this.velocity.x * 4,this.position.y + this.velocity.y * 4);
         pop();
     }

@@ -11,13 +11,15 @@ class spaceship
         this.velocity = new Vec2(0,0);
         this.acceleration = new Vec2(0,0);
 
-        this.team = team;
+        this.ally = team;
         this.hp = 50;
         this.fireDmg = 5;
-        this.fireRate = 0.5;
+        this.fireRate = 1;
         this.armor = 0;
         this.barrier = 0;
         this.speed_max = 3;
+        this.x_length = 5;
+        this.y_length = 5;
     }
 
     update()
