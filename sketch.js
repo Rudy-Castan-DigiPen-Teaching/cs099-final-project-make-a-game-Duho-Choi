@@ -5,12 +5,17 @@
 
 let current_screen = 0;
 
+// screens
 const main_menu = 0;
 const game_screen = 1;
 const help_screen = 2;
 const options_screen = 10;
 const credits_screen = 11;
 
+// images
+let player_spaceship_img;
+
+// buttons
 let start_button;
 let play_button;
 let options_button;
@@ -19,14 +24,18 @@ let main_button;
 
 let player_camera;
 
+// player & enemies
 let player;
 let player_laser = [];
+let enemy;
+
+let stars = [];
 
 let blast_interval;
 
 function preload()
 {
-
+    player_spaceship_img = loadImage('assets/spaceship_player.png')
 }
 
 function setup()
@@ -43,8 +52,12 @@ function setup()
     // camera
     player_camera = new Camera();
 
-    // player & enemies
-    player = new spaceship(width/2, height/2, 0);
+    // player
+    player = new spaceship(width/2,100,60);
+
+    // enemy
+    enemy = new spaceship(100,height/2,55,50);
+    enemy.team = 1;
 }
 
 function draw()
@@ -101,24 +114,42 @@ function draw()
         // game screen
         case game_screen:
 
+            // update camera
+            player_camera.x = player.position.x - width/2;
+            player_camera.y = player.position.y - height/2;
+            player_camera.beginDraw();
+
+            // update player
             player.update();
             player.draw();
+
+            if(enemy.hp > 0)
+            {
+                enemy.update();
+                enemy.draw();
+                if(enemy.hp < enemy.max_hp)
+                    enemy.draw_hp();
+            }
+            else
+                enemy = 0;
             
-            // player lasers update
+            //  update player lasers
             for(let lasers of player_laser)
             {
                 lasers.update();
+                
+                if(enemy.hp > 0)
+                {
+                    enemy.hitByLaser(lasers);
+                }
             }
             
             // if laser out from screen, delete laser
             for(let i = player_laser.length - 1; i >= 0; --i)
             {
-                let particle = player_laser[i]
-                if(particle.position.x > width || particle.position.x < 0 ||
-                    particle.position.y > height || particle.position.y < 0)
-                {
+                let particle = player_laser[i];
+                if(particle.collide == true)
                     player_laser.splice(i,1);
-                }
             }
             break;
     }
@@ -136,7 +167,7 @@ function draw()
 
 function blast_laser()
 {
-    player_laser.push(new laser(player));
+    player_laser.push(new laser(player, player.fireDmg));
 }
 
 function keyPressed()

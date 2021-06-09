@@ -5,12 +5,14 @@
 
 class laser
 {
-    constructor(shooter)
+    constructor(shooter, damage)
     {
         this.position = new Vec2(shooter.position.x,shooter.position.y);
         this.velocity = new Vec2(shooter.velocity.x,shooter.velocity.y);
         this.team = shooter.team;
-        this.bullet_spd = 8;
+        this.bullet_spd = 10;
+        this.dmg = damage;
+        this.collide = false;
     }
 
     update()
@@ -21,12 +23,9 @@ class laser
         this.position.addTo(this.velocity);
 
         push();
-        stroke(255);
+        stroke('#E1411F');
         strokeWeight(2);
-        line(this.position.x,this.position.y,this.position.x + this.velocity.x * 4,this.position.y + this.velocity.y * 4);
-        strokeWeight(10);
-        noStroke();
-        point(this.position.x + this.velocity.x * 4,this.position.y + this.velocity.y * 4);
+        line(this.position.x,this.position.y,this.position.x - this.velocity.x * 4,this.position.y - this.velocity.y * 4);
         pop();
     }
 }
