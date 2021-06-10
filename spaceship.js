@@ -21,7 +21,7 @@ class spaceship
         this.fireRate = 4;
         this.armor = 0;
         this.barrier = 0;
-        this.speed_max = 3;
+        this.speed_max = 5;
         this.diameter = length;
     }
 
@@ -61,7 +61,7 @@ class spaceship
         rotate(this.velocity.getAngle());
         noStroke();
         imageMode(CENTER);
-        image(player_spaceship_img,0,0,130,120);
+        image(player_spaceship_img,0,0,80,80);
         pop();
 
         // hit box
@@ -80,10 +80,10 @@ class spaceship
         noStroke();
         rectMode(CENTER);
         fill(170);
-        rect(this.position.x,this.position.y + this.diameter * 3/2,150,20);
+        rect(this.position.x,this.position.y + this.diameter * 2,120,15);
         fill(70,255,120);
         rectMode(CORNER);
-        rect(this.position.x - 75,this.position.y + this.diameter * 3/2 - 10,map(this.hp,0,this.max_hp,0,150),20)
+        rect(this.position.x - 60,this.position.y + this.diameter * 2 - 7.5,map(this.hp,0,this.max_hp,0,120),15);
         pop();
     }
 

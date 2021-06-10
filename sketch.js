@@ -27,7 +27,7 @@ let player_camera;
 // player & enemies
 let player;
 let player_laser = [];
-let enemy;
+let enemy = [];
 
 let stars = [];
 
@@ -53,11 +53,10 @@ function setup()
     player_camera = new Camera();
 
     // player
-    player = new spaceship(width/2,100,60);
+    player = new spaceship(width/2,100,30);
 
     // enemy
-    enemy = new spaceship(100,height/2,55,50);
-    enemy.team = 1;
+    enemy.push(new spaceship(100,height/2,30,50));
 }
 
 function draw()
@@ -123,36 +122,49 @@ function draw()
             player.update();
             player.draw();
 
-            if(enemy.hp > 0)
+            // update enemies
+            for(let enemies of enemy)
             {
-                enemy.update();
-                enemy.draw();
-                if(enemy.hp < enemy.max_hp)
-                    enemy.draw_hp();
+                enemies.update();
+                enemies.draw();
+                enemies.team = 1;
+                if(enemies.hp < enemies.max_hp)
+                    enemies.draw_hp();
             }
-            else
-                enemy = 0;
             
-            //  update player lasers
+            // update player lasers
             for(let lasers of player_laser)
             {
                 lasers.update();
-                
-                if(enemy.hp > 0)
+
+                // enemy hit by laser
+                for(let enemies of enemy)
                 {
-                    enemy.hitByLaser(lasers);
+                    if(enemies.hp > 0)
+                        enemies.hitByLaser(lasers);
+                }
+            }
+
+            for(let i = enemy.length - 1; i >= 0; --i)
+            {
+                if(enemy[i].hp <= 0)
+                {
+                    enemy.splice(i,1);
                 }
             }
             
-            // if laser out from screen, delete laser
+            // if laser collide with object, delete laser
             for(let i = player_laser.length - 1; i >= 0; --i)
             {
-                let particle = player_laser[i];
-                if(particle.collide == true)
+                if(player_laser[i].collide == true)
                     player_laser.splice(i,1);
             }
             break;
     }
+
+    push();
+    
+    pop();
     
     // if current screen is not main menu and game screen, make main button
     if(current_screen != main_menu && current_screen != game_screen)

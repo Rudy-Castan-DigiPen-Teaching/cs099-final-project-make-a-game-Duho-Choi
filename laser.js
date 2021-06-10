@@ -10,7 +10,7 @@ class laser
         this.position = new Vec2(shooter.position.x,shooter.position.y);
         this.velocity = new Vec2(shooter.velocity.x,shooter.velocity.y);
         this.team = shooter.team;
-        this.bullet_spd = 10;
+        this.laser_spd = 10;
         this.dmg = damage;
         this.collide = false;
     }
@@ -18,7 +18,7 @@ class laser
     update()
     {
         this.velocity.setAngle(this.velocity.getAngle());
-        this.velocity.setLength(this.bullet_spd);
+        this.velocity.setLength(this.laser_spd);
         
         this.position.addTo(this.velocity);
 
