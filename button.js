@@ -3,6 +3,13 @@
 // Course     : CS099
 // Spring 2021
 
+// buttons
+let start_button;
+let play_button;
+let options_button;
+let credits_button;
+let main_button;
+
 class button
 {
     constructor(x_pos,y_pos,width,height)

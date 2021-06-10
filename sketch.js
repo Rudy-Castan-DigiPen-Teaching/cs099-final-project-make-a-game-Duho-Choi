@@ -3,13 +3,7 @@
 // Course     : CS099
 // Spring 2021
 
-// buttons
-let start_button;
-let play_button;
-let options_button;
-let credits_button;
-let main_button;
-
+// camera
 let player_camera;
 
 // player & enemies
@@ -18,7 +12,8 @@ let player_laser = [];
 let enemy = [];
 let enemy_laser = [];
 
-let stars;
+// shop
+let shop_1;
 
 let blast_interval;
 
