@@ -1,5 +1,5 @@
 // Name       : Duho Choi
-// Assignment : 34_ship_sfx
+// Assignment : make_a_game
 // Course     : CS099
 // Spring 2021
 
