@@ -15,13 +15,20 @@ class spaceship
         this.team = 0;
 
         this.level = 1;
-        this.max_hp = health;
+        this.exp = 0;
+        this.max_exp = 20;
+
         this.hp = health;
-        this.fireDmg = 5;
+        this.max_hp = health;
+
+        this.fireDmg = 20;
         this.fireRate = 4;
+
         this.armor = 0;
         this.barrier = 0;
+
         this.speed_max = 5;
+
         this.diameter = length;
     }
 
@@ -75,7 +82,7 @@ class spaceship
 
     draw_hp()
     {
-        // hp box
+        // hp bar
         push();
         noStroke();
         rectMode(CENTER);
@@ -84,6 +91,39 @@ class spaceship
         fill(70,255,120);
         rectMode(CORNER);
         rect(this.position.x - 60,this.position.y + this.diameter * 2 - 7.5,map(this.hp,0,this.max_hp,0,120),15);
+        pop();
+    }
+
+    draw_interface()
+    {
+        // level & exp bar
+        push();
+        noStroke();
+        fill(255);
+        textSize(45);
+        textAlign(LEFT,CENTER);
+        text('Lv : ' + this.level,width/30,height * 19/20); 
+        rectMode(CENTER);
+        fill(170);
+        rect(width/4,height * 19/20,200,30);
+        fill(70,255,255);
+        rectMode(CORNER);
+        rect(width/4 - 100,height * 19/20 - 15,map(this.exp,0,this.max_exp,0,200),30);
+        pop();
+
+        // hp bar
+        push();
+        noStroke();
+        fill(255);
+        textSize(45);
+        textAlign(LEFT,CENTER);
+        text('HP',width/30,height * 17.5/20);
+        rectMode(CENTER);
+        fill(170);
+        rect(width/4.5,height * 17.5/20,270,30);
+        fill(70,255,120);
+        rectMode(CORNER);
+        rect(width/4.5 - 135,height * 17.5/20 - 15,map(this.hp,0,this.max_hp,0,270),30);
         pop();
     }
 
@@ -96,5 +136,10 @@ class spaceship
             this.hp -= laser.dmg;
             laser.collide = true;
         }
+    }
+
+    explode()
+    {
+
     }
 }

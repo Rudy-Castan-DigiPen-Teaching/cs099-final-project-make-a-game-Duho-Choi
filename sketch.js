@@ -37,7 +37,8 @@ function setup()
     player_camera = new Camera();
 
     // player
-    player = new spaceship(width/2,100,30);
+    player = new spaceship(0,0,30);
+    player.exp = 13;
 
     // enemy
     enemy.push(new spaceship(100,height/2,30,50));
@@ -109,21 +110,33 @@ function draw()
             // update camera
             player_camera.x = player.position.x - width/2;
             player_camera.y = player.position.y - height/2;
+            player.draw_interface();
+
             player_camera.beginDraw();
 
             // update player
             player.update();
             player.draw();
-            player.draw_interface();
 
             // update enemies
             for(let enemies of enemy)
             {
-                enemies.update();
-                enemies.draw();
-                enemies.team = 1;
-                if(enemies.hp < enemies.max_hp)
-                    enemies.draw_hp();
+                if(enemies.hp > 0)
+                {
+                    enemies.update();
+                    enemies.draw();
+                    enemies.team = 1;
+                    if(enemies.hp < enemies.max_hp)
+                        enemies.draw_hp();
+                }
+                else
+                {
+                    enemies.explode();
+                    for(let i = enemy.length - 1; i >= 0; --i)
+                    {
+                        enemy.splice(i,1);
+                    }
+                }
             }
             
             // update player lasers
@@ -139,13 +152,6 @@ function draw()
                 }
             }
 
-            for(let i = enemy.length - 1; i >= 0; --i)
-            {
-                if(enemy[i].hp <= 0)
-                {
-                    enemy.splice(i,1);
-                }
-            }
             
             // if laser collide with object, delete laser
             for(let i = player_laser.length - 1; i >= 0; --i)
@@ -191,6 +197,14 @@ function draw()
 function blast_laser()
 {
     player_laser.push(new laser(player, player.fireDmg));
+}
+
+function delete_from_array(arr)
+{
+    for(let i = arr.length - 1; i >= 0; --i)
+    {
+        arr.splice(i,1);
+    }
 }
 
 // press space bar = shooting laser 
