@@ -3,18 +3,6 @@
 // Course     : CS099
 // Spring 2021
 
-let current_screen = 0;
-
-// screens
-const main_menu = 0;
-const game_screen = 1;
-const help_screen = 2;
-const options_screen = 10;
-const credits_screen = 11;
-
-// images
-let player_spaceship_img;
-
 // buttons
 let start_button;
 let play_button;
@@ -28,15 +16,11 @@ let player_camera;
 let player;
 let player_laser = [];
 let enemy = [];
+let enemy_laser = [];
 
-let stars = [];
+let stars;
 
 let blast_interval;
-
-function preload()
-{
-    player_spaceship_img = loadImage('assets/spaceship_player.png')
-}
 
 function setup()
 {
@@ -66,6 +50,15 @@ function draw()
     {
         // main menu
         case main_menu:
+
+            // Game title : Outlaw of the Galaxy
+            push();
+            textSize(100);
+            textAlign(LEFT,TOP);
+            noStroke();
+            fill(255);
+            text('Outlaw\nOf the Galaxy',70,70);
+            pop();
 
             // draw buttons
             start_button.draw('START');
@@ -121,6 +114,7 @@ function draw()
             // update player
             player.update();
             player.draw();
+            player.draw_interface();
 
             // update enemies
             for(let enemies of enemy)
@@ -159,6 +153,23 @@ function draw()
                 if(player_laser[i].collide == true)
                     player_laser.splice(i,1);
             }
+
+            if(player.exp == player.max_exp)
+            {
+
+            }
+
+            break;
+        
+        // level up screen
+        case levelUp_screen:
+            
+            
+            break;
+
+        // shop screen
+        case shop_screen:
+
             break;
     }
 
@@ -182,6 +193,7 @@ function blast_laser()
     player_laser.push(new laser(player, player.fireDmg));
 }
 
+// press space bar = shooting laser 
 function keyPressed()
 {
     let fireRate = 1000 / player.fireRate;
@@ -192,6 +204,7 @@ function keyPressed()
     }
 }
 
+// release space bar = stop shooting laser
 function keyReleased()
 {
     if(keyCode == 32)
