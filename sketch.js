@@ -37,6 +37,8 @@ function setup()
 
     // enemy
     enemy.push(new spaceship(100,height/2,30,50));
+
+    shop_1 = new shop(-width/2,-height/2);
 }
 
 function draw()
@@ -53,7 +55,7 @@ function draw()
             textAlign(LEFT,TOP);
             noStroke();
             fill(255);
-            text('Outlaw\nOf the Galaxy',70,70);
+            //text('Outlaw\nOf the Galaxy',70,70);
             pop();
 
             // draw buttons
@@ -101,17 +103,21 @@ function draw()
 
         // game screen
         case game_screen:
-
-            // update camera
+            
             player_camera.x = player.position.x - width/2;
             player_camera.y = player.position.y - height/2;
             player.draw_interface();
 
+            // update camera
             player_camera.beginDraw();
 
             // update player
+
             player.update();
             player.draw();
+
+            // update shop
+            shop_1.draw();
 
             // update enemies
             for(let enemies of enemy)

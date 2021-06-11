@@ -21,7 +21,7 @@ class spaceship
         this.hp = health;
         this.max_hp = health;
 
-        this.fireDmg = 20;
+        this.fireDmg = 10;
         this.fireRate = 4;
 
         this.armor = 0;
@@ -109,14 +109,9 @@ class spaceship
         fill(70,255,255);
         rectMode(CORNER);
         rect(width/4 - 100,height * 19/20 - 15,map(this.exp,0,this.max_exp,0,200),30);
-        pop();
 
         // hp bar
-        push();
-        noStroke();
         fill(255);
-        textSize(45);
-        textAlign(LEFT,CENTER);
         text('HP',width/30,height * 17.5/20);
         rectMode(CENTER);
         fill(170);
@@ -124,6 +119,15 @@ class spaceship
         fill(70,255,120);
         rectMode(CORNER);
         rect(width/4.5 - 135,height * 17.5/20 - 15,map(this.hp,0,this.max_hp,0,270),30);
+        pop();
+
+        // coordinate
+        push();
+        noStroke();
+        fill(255);
+        textAlign(LEFT,CENTER);
+        textSize(20);
+        text('X : ' + int(this.position.x) + '    Y : ' + int(this.position.y),width * 4/5,20);
         pop();
     }
 
