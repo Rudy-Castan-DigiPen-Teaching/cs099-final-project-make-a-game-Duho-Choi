@@ -4,7 +4,7 @@
 // Spring 2021
 
 // current screen
-let current_screen = 1;
+let current_screen = 0;
 
 // camera
 let player_camera;
@@ -48,6 +48,9 @@ function setup()
     // enemy
     enemy.push( new spaceship( 100, height / 2, 30, 50 ) );
     enemy.push( new spaceship( 400, height / 2 - 300, 30, 50 ) );
+    enemy.push( new spaceship( 200, height / 2 + 200, 30, 50 ) );
+    enemy.push( new spaceship( -300, height / 2 - 100, 30, 50 ) );
+    enemy[ 3 ].velocity.setAngle( radians( 180 ) );
 
     main_shop = new shop( -500, -500 );
 }
@@ -139,11 +142,8 @@ function draw()
             }
             else if ( enemy[ i ].hp <= 0 )
             {
-                enemy[ i ].explode();
-                for ( let k = enemy.length - 1; k >= 0; --k )
-                {
-                    enemy.splice( k, -1 );
-                }
+                enemy[ i ].reward( player );
+                enemy.splice( i, 1 );
             }
         }
 
@@ -198,11 +198,18 @@ function draw()
             player.position.y > main_shop.y - main_shop.height / 2 && player.position.y < main_shop.y + main_shop
             .height / 2 && current_screen == game_screen )
             enter_shop();
+        if ( player.exp == player.max_exp )
+        {
+            player.level += 1;
+            player.exp = 0;
+            player.max_exp += 30;
+        }
 
         break;
 
         // level up screen
-    case levelUp_screen:
+    case level_up_screen:
+
         levelup_button1.draw();
         levelup_button2.draw();
         levelup_button3.draw();
@@ -211,6 +218,7 @@ function draw()
 
         // shop screen
     case shop_screen:
+        main_shop.draw_interface(player);
 
         break;
     }

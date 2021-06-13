@@ -10,7 +10,7 @@ class laser
         this.position = new Vec2( shooter.position.x, shooter.position.y );
         this.velocity = new Vec2( shooter.velocity.x, shooter.velocity.y );
         this.team = shooter.team;
-        this.laser_spd = 10;
+        this.laser_spd = 5 + shooter.velocity.getLength();
         this.dmg = damage;
         this.collide = false;
     }
@@ -29,4 +29,6 @@ class laser
             .velocity.y * 4 );
         pop();
     }
+
+
 }

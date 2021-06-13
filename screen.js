@@ -6,7 +6,7 @@
 // screens
 const main_menu = 0;
 const game_screen = 1;
-const levelUp_screen = 2;
+const level_up_screen = 2;
 const shop_screen = 3;
 const help_screen = 10;
 const options_screen = 11;

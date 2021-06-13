@@ -115,8 +115,8 @@ class spaceship
         textAlign( LEFT, CENTER );
 
         // coin
-        image( coin_img,width / 20, height * 16 / 20 ,150,150);
-        text(":  " + this.coin,width/10,height* 16 / 20);
+        image( coin_img, width / 20, height * 16 / 20, 150, 150 );
+        text( ":  " + this.coin, width / 10, height * 16 / 20 );
 
         // level & exp bar
         text( "Lv : " + this.level, width / 30, height * 19 / 20 );
@@ -126,6 +126,12 @@ class spaceship
         fill( 70, 255, 255 );
         rectMode( CORNER );
         rect( width / 4 - 100, height * 19 / 20 - 15, map( this.exp, 0, this.max_exp, 0, 200 ), 30 );
+        push();
+        fill(0);
+        textAlign(CENTER,CENTER);
+        textSize(30);
+        text(this.exp + " / " + this.max_exp, width / 4 ,height * 19 / 20);
+        pop();
 
         // hp bar
         fill( 255 );
@@ -136,13 +142,19 @@ class spaceship
         fill( 70, 255, 120 );
         rectMode( CORNER );
         rect( width / 4.5 - 135, height * 17.5 / 20 - 15, map( this.hp, 0, this.max_hp, 0, 270 ), 30 );
+        push();
+        fill(0);
+        textAlign(CENTER,CENTER);
+        textSize(30);
+        text(this.hp + " / " + this.max_hp, width / 4.5 ,height * 17.5 / 20);
+        pop();
 
         // coordinate
         fill( 255 );
         textAlign( LEFT, CENTER );
         textSize( 20 );
         text( "X : " + int( this.position.x ) + "  Y : " + int( this.position.y ), width * 4 / 5, 20 );
-        
+
         pop();
     }
 
@@ -158,8 +170,9 @@ class spaceship
         }
     }
 
-    explode()
+    reward(player)
     {
-
+        player.coin += this.level * 10;
+        player.exp += this.level * 10;
     }
 }
