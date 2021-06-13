@@ -8,7 +8,8 @@ let start_button;
 let play_button;
 let options_button;
 let credits_button;
-let main_button;
+let return_main_button;
+let return_game_button;
 
 let levelup_button1;
 let levelup_button2;

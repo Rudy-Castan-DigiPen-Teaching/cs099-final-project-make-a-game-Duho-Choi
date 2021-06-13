@@ -4,7 +4,7 @@
 // Spring 2021
 
 // current screen
-let current_screen = 0;
+let current_screen = 1;
 
 // camera
 let player_camera;
@@ -30,7 +30,9 @@ function setup()
     play_button = new button( width / 2, height / 11, 300, 60 );
     options_button = new button( width / 2, height / 2 + 200, 300, 60 );
     credits_button = new button( width / 2, height / 2 + 300, 300, 60 );
-    main_button = new button( width / 13, height / 12, 50, 50 );
+
+    return_main_button = new button( width / 13, height / 12, 50, 50 );
+    return_game_button = new button( width / 13, height / 12, 50, 50 );
 
     levelup_button1 = new button( width / 5, height / 2, 250, 450 );
     levelup_button2 = new button( width / 2, height / 2, 250, 450 );
@@ -191,8 +193,11 @@ function draw()
         // update player
         player.update();
         player.draw_interface();
-
-        enter_shop();
+        if ( player.position.x > main_shop.x - main_shop.width / 2 && player.position.x < main_shop.x + main_shop
+            .width / 2 &&
+            player.position.y > main_shop.y - main_shop.height / 2 && player.position.y < main_shop.y + main_shop
+            .height / 2 && current_screen == game_screen )
+            enter_shop();
 
         break;
 
@@ -210,14 +215,25 @@ function draw()
         break;
     }
 
-
-    // if current screen is not main menu and game screen, make main button
-    if ( current_screen != main_menu && current_screen != game_screen )
+    // if current screen is help screen, options screen or credits screen, 
+    // draw return main menu button
+    if ( current_screen >= help_screen )
     {
-        main_button.draw( '◁' );
-        if ( main_button.clicked() )
+        return_main_button.draw( '◁' );
+        if ( return_main_button.clicked() )
         {
             current_screen = main_menu;
+        }
+    }
+
+    // if current screen is level up screen or shop screen,
+    // draw return game button
+    else if ( current_screen > game_screen )
+    {
+        return_game_button.draw( '◁' );
+        if ( return_game_button.clicked() )
+        {
+            current_screen = game_screen;
         }
     }
 }
@@ -267,9 +283,10 @@ function keyReleased()
 
 function enter_shop()
 {
-    if ( player.position.x > main_shop.x && player.position.x < main_shop.x + main_shop.width &&
-        player.position.y > main_shop.y && player.position.y < main_shop.y + main_shop.height )
-    {
-        current_screen = shop_screen;
-    }
+    player.position.x = main_shop.x + main_shop.width * 2;
+    player.position.y = main_shop.y;
+    player.velocity.setLength( 0 );
+    player.velocity.setAngle( 0 );
+    player.acceleration.setLength( 0 );
+    current_screen = shop_screen;
 }

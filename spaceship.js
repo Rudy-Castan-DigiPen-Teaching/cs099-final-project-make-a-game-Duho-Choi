@@ -18,6 +18,7 @@ class spaceship
         this.level = 1;
         this.exp = 0;
         this.max_exp = 20;
+        this.coin = 0;
 
         this.hp = health;
         this.max_hp = health;
@@ -68,7 +69,7 @@ class spaceship
 
     backward()
     {
-
+        this.acceleration.x = -0.1;
     }
 
     draw()
@@ -107,12 +108,17 @@ class spaceship
 
     draw_interface()
     {
-        // level & exp bar
         push();
         noStroke();
         fill( 255 );
         textSize( 45 );
         textAlign( LEFT, CENTER );
+
+        // coin
+        image( coin_img,width / 20, height * 16 / 20 ,150,150);
+        text(":  " + this.coin,width/10,height* 16 / 20);
+
+        // level & exp bar
         text( "Lv : " + this.level, width / 30, height * 19 / 20 );
         rectMode( CENTER );
         fill( 170 );
@@ -136,6 +142,7 @@ class spaceship
         textAlign( LEFT, CENTER );
         textSize( 20 );
         text( "X : " + int( this.position.x ) + "  Y : " + int( this.position.y ), width * 4 / 5, 20 );
+        
         pop();
     }
 
