@@ -5,12 +5,12 @@
 
 class spaceship
 {
-    constructor(starting_x,starting_y,length,health = 50)
+    constructor( starting_x, starting_y, length, health = 50 )
     {
-        this.position = new Vec2(starting_x,starting_y);
-        this.velocity = new Vec2(0,0);
-        this.velocity.setAngle(0);
-        this.acceleration = new Vec2(0,0);
+        this.position = new Vec2( starting_x, starting_y );
+        this.velocity = new Vec2( 0, 0 );
+        this.velocity.setAngle( 0 );
+        this.acceleration = new Vec2( 0, 0 );
 
         // 0 = player, 1 = enemy
         this.team = 0;
@@ -33,35 +33,35 @@ class spaceship
         this.diameter = length;
     }
 
-    update()    
+    update()
     {
-        this.position.addTo(this.velocity);            
-        this.velocity.setLength(this.acceleration.getLength() + this.velocity.getLength());
-        if(this.velocity.getLength() > this.speed_max)
+        this.position.addTo( this.velocity );
+        this.velocity.setLength( this.acceleration.getLength() + this.velocity.getLength() );
+        if ( this.velocity.getLength() > this.speed_max )
         {
-            this.velocity.setLength(this.speed_max);
+            this.velocity.setLength( this.speed_max );
         }
-        else if(this.velocity.getLength < 0)
+        else if ( this.velocity.getLength < 0 )
         {
-            this.velocity.setLength(0);
+            this.velocity.setLength( 0 );
         }
 
-        if(keyIsPressed && this.team == 0)
+        if ( keyIsPressed && this.team == 0 )
         {
             // key w = move forward
-            if(keyIsDown(87))
+            if ( keyIsDown( 87 ) )
             {
                 this.acceleration.x = 0.1;
             }
             // key a = turn left
-            if(keyIsDown(65))
+            if ( keyIsDown( 65 ) )
             {
-                this.velocity.setAngle(this.velocity.getAngle() - 0.05);
+                this.velocity.setAngle( this.velocity.getAngle() - 0.05 );
             }
             // key d = turn right
-            if(keyIsDown(68))
+            if ( keyIsDown( 68 ) )
             {
-                this.velocity.setAngle(this.velocity.getAngle() + 0.05);
+                this.velocity.setAngle( this.velocity.getAngle() + 0.05 );
             }
         }
     }
@@ -75,18 +75,18 @@ class spaceship
     {
         // draw spaceship
         push();
-        translate(this.position.x, this.position.y);
-        rotate(this.velocity.getAngle());
+        translate( this.position.x, this.position.y );
+        rotate( this.velocity.getAngle() );
         noStroke();
-        image(player_spaceship_img,0,0,80,80);
+        image( player_spaceship_img, 0, 0, 80, 80 );
         pop();
 
         // hit box
         push();
         noFill();
-        strokeWeight(3);
-        stroke("red");
-        circle(this.position.x,this.position.y,this.diameter * 2);
+        strokeWeight( 3 );
+        stroke( "red" );
+        circle( this.position.x, this.position.y, this.diameter * 2 );
         pop();
     }
 
@@ -95,12 +95,13 @@ class spaceship
         // hp bar
         push();
         noStroke();
-        rectMode(CENTER);
-        fill(170);
-        rect(this.position.x,this.position.y + this.diameter * 2,120,15);
-        fill(70,255,120);
-        rectMode(CORNER);
-        rect(this.position.x - 60,this.position.y + this.diameter * 2 - 7.5,map(this.hp,0,this.max_hp,0,120),15);
+        rectMode( CENTER );
+        fill( 170 );
+        rect( this.position.x, this.position.y + this.diameter * 2, 120, 15 );
+        fill( 70, 255, 120 );
+        rectMode( CORNER );
+        rect( this.position.x - 60, this.position.y + this.diameter * 2 - 7.5, map( this.hp, 0, this.max_hp, 0,
+            120 ), 15 );
         pop();
     }
 
@@ -109,40 +110,41 @@ class spaceship
         // level & exp bar
         push();
         noStroke();
-        fill(255);
-        textSize(45);
-        textAlign(LEFT,CENTER);
-        text("Lv : " + this.level,width/30,height * 19/20); 
-        rectMode(CENTER);
-        fill(170);
-        rect(width/4,height * 19/20,200,30);
-        fill(70,255,255);
-        rectMode(CORNER);
-        rect(width/4 - 100,height * 19/20 - 15,map(this.exp,0,this.max_exp,0,200),30);
+        fill( 255 );
+        textSize( 45 );
+        textAlign( LEFT, CENTER );
+        text( "Lv : " + this.level, width / 30, height * 19 / 20 );
+        rectMode( CENTER );
+        fill( 170 );
+        rect( width / 4, height * 19 / 20, 200, 30 );
+        fill( 70, 255, 255 );
+        rectMode( CORNER );
+        rect( width / 4 - 100, height * 19 / 20 - 15, map( this.exp, 0, this.max_exp, 0, 200 ), 30 );
 
         // hp bar
-        fill(255);
-        text("HP",width/30,height * 17.5/20);
-        rectMode(CENTER);
-        fill(170);
-        rect(width/4.5,height * 17.5/20,270,30);
-        fill(70,255,120);
-        rectMode(CORNER);
-        rect(width/4.5 - 135,height * 17.5/20 - 15,map(this.hp,0,this.max_hp,0,270),30);
+        fill( 255 );
+        text( "HP", width / 30, height * 17.5 / 20 );
+        rectMode( CENTER );
+        fill( 170 );
+        rect( width / 4.5, height * 17.5 / 20, 270, 30 );
+        fill( 70, 255, 120 );
+        rectMode( CORNER );
+        rect( width / 4.5 - 135, height * 17.5 / 20 - 15, map( this.hp, 0, this.max_hp, 0, 270 ), 30 );
 
         // coordinate
-        fill(255);
-        textAlign(LEFT,CENTER);
-        textSize(20);
-        text("X : " + int(this.position.x) + "  Y : " + int(this.position.y),width * 4/5,20);
+        fill( 255 );
+        textAlign( LEFT, CENTER );
+        textSize( 20 );
+        text( "X : " + int( this.position.x ) + "  Y : " + int( this.position.y ), width * 4 / 5, 20 );
         pop();
     }
 
-    hitByLaser(laser)
+    hitByLaser( laser )
     {
-        const distance = sqrt((this.position.x - laser.position.x) * (this.position.x - laser.position.x) + (this.position.y - laser.position.y) * (this.position.y - laser.position.y));
+        const distance = sqrt( ( this.position.x - laser.position.x ) * ( this.position.x - laser.position.x ) + (
+            this.position.y - laser.position.y ) * ( this.position.y - laser.position.y ) );
 
-        if(distance < this.diameter && laser.collide == false && this.team != laser.team)
+        if ( distance < this.diameter && laser.collide == false && this.team != laser.team )
         {
             this.hp -= laser.dmg;
             laser.collide = true;

@@ -13,11 +13,11 @@ class Camera
 
     beginDraw()
     {
-        translate(-this.x, -this.y);
+        translate( -this.x, -this.y );
     }
 
     stopDraw()
     {
-        translate(this.x,this.y);
+        translate( this.x, this.y );
     }
 }

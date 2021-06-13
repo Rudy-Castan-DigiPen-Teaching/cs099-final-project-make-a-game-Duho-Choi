@@ -5,7 +5,7 @@
 
 class shop
 {
-    constructor(start_x,start_y)
+    constructor( start_x, start_y )
     {
         this.x = start_x;
         this.y = start_y;
@@ -15,12 +15,12 @@ class shop
 
     draw()
     {
-        image(shop_img,this.x,this.y);
+        image( shop_img, this.x, this.y );
         push();
         noFill();
-        stroke("red");
-        strokeWeight(5);
-        rect(this.x - this.width / 2,this.y - this.height / 2,this.width,this.height);
+        stroke( "red" );
+        strokeWeight( 5 );
+        rect( this.x - this.width / 2, this.y - this.height / 2, this.width, this.height );
         pop();
     }
 

@@ -13,9 +13,9 @@ let bgm;
 function preload()
 {
     // images
-    player_spaceship_img = loadImage('assets/spaceship_player.png');
-    shop_img = loadImage('assets/shopStation.png');
+    player_spaceship_img = loadImage( 'assets/spaceship_player.png' );
+    shop_img = loadImage( 'assets/shopStation.png' );
 
     // sounds
-    bgm = loadSound('assets/bgm.mp3');
+    bgm = loadSound( 'assets/bgm.mp3' );
 }
