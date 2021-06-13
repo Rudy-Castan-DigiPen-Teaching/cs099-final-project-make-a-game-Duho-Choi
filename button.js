@@ -10,6 +10,10 @@ let options_button;
 let credits_button;
 let main_button;
 
+let levelup_button1;
+let levelup_button2;
+let levelup_button3;
+
 class button
 {
     constructor(x_pos,y_pos,width,height)
@@ -28,13 +32,13 @@ class button
         rectMode(CENTER);
         if(mouseInButton == true)
         {
-            stroke('#ffcc66');
-            fill('#ff9933');
+            stroke("#ffcc66");
+            fill("#ff9933");
         }
         else
         {
-            stroke('#ff9933');
-            fill('#ffcc66');
+            stroke("#ff9933");
+            fill("#ffcc66");
         }
         strokeWeight(5);
         rect(this.x,this.y,this.width,this.height);

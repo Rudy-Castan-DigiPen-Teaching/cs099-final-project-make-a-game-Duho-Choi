@@ -3,7 +3,4 @@
 // Course     : CS099
 // Spring 2021
 
-class guard
-{
 
-}

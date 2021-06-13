@@ -9,6 +9,7 @@ class spaceship
     {
         this.position = new Vec2(starting_x,starting_y);
         this.velocity = new Vec2(0,0);
+        this.velocity.setAngle(0);
         this.acceleration = new Vec2(0,0);
 
         // 0 = player, 1 = enemy
@@ -34,10 +35,15 @@ class spaceship
 
     update()    
     {
-        this.position.addTo(this.velocity);
-        if(this.velocity.getLength() < this.speed_max)
+        this.position.addTo(this.velocity);            
+        this.velocity.setLength(this.acceleration.getLength() + this.velocity.getLength());
+        if(this.velocity.getLength() > this.speed_max)
         {
-            this.velocity.addTo(this.acceleration);
+            this.velocity.setLength(this.speed_max);
+        }
+        else if(this.velocity.getLength < 0)
+        {
+            this.velocity.setLength(0);
         }
 
         if(keyIsPressed && this.team == 0)
@@ -60,6 +66,11 @@ class spaceship
         }
     }
 
+    backward()
+    {
+
+    }
+
     draw()
     {
         // draw spaceship
@@ -67,7 +78,6 @@ class spaceship
         translate(this.position.x, this.position.y);
         rotate(this.velocity.getAngle());
         noStroke();
-        imageMode(CENTER);
         image(player_spaceship_img,0,0,80,80);
         pop();
 
@@ -75,7 +85,7 @@ class spaceship
         push();
         noFill();
         strokeWeight(3);
-        stroke('red');
+        stroke("red");
         circle(this.position.x,this.position.y,this.diameter * 2);
         pop();
     }
@@ -102,7 +112,7 @@ class spaceship
         fill(255);
         textSize(45);
         textAlign(LEFT,CENTER);
-        text('Lv : ' + this.level,width/30,height * 19/20); 
+        text("Lv : " + this.level,width/30,height * 19/20); 
         rectMode(CENTER);
         fill(170);
         rect(width/4,height * 19/20,200,30);
@@ -112,22 +122,19 @@ class spaceship
 
         // hp bar
         fill(255);
-        text('HP',width/30,height * 17.5/20);
+        text("HP",width/30,height * 17.5/20);
         rectMode(CENTER);
         fill(170);
         rect(width/4.5,height * 17.5/20,270,30);
         fill(70,255,120);
         rectMode(CORNER);
         rect(width/4.5 - 135,height * 17.5/20 - 15,map(this.hp,0,this.max_hp,0,270),30);
-        pop();
 
         // coordinate
-        push();
-        noStroke();
         fill(255);
         textAlign(LEFT,CENTER);
         textSize(20);
-        text('X : ' + int(this.position.x) + '    Y : ' + int(this.position.y),width * 4/5,20);
+        text("X : " + int(this.position.x) + "  Y : " + int(this.position.y),width * 4/5,20);
         pop();
     }
 

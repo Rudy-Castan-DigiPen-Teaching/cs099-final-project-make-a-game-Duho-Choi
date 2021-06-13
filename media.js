@@ -8,6 +8,7 @@ let player_spaceship_img;
 let shop_img;
 
 // sounds
+let bgm;
 
 function preload()
 {
@@ -16,4 +17,5 @@ function preload()
     shop_img = loadImage('assets/shopStation.png');
 
     // sounds
+    bgm = loadSound('assets/bgm.mp3');
 }

@@ -15,4 +15,9 @@ class Camera
     {
         translate(-this.x, -this.y);
     }
+
+    stopDraw()
+    {
+        translate(this.x,this.y);
+    }
 }

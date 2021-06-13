@@ -4,8 +4,6 @@
 // Spring 2021
 
 // screens
-let current_screen = 0;
-
 const main_menu = 0;
 const game_screen = 1;
 const levelUp_screen = 2;
