@@ -16,9 +16,11 @@ function preload()
 {
     // images
     player_spaceship_img = loadImage( 'assets/spaceship_player.png' );
+    enemy_spaceship_img = loadImage( 'assets/spaceship_enemy.png' );
     shop_img = loadImage( 'assets/shopStation.png' );
     coin_img = loadImage( 'assets/coin.png' );
 
-    // sounds
+    // sound
+    soundFormats('mp3', 'ogg');
     bgm = loadSound( 'assets/bgm.mp3' );
 }

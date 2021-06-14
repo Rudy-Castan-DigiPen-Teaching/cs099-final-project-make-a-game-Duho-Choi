@@ -17,7 +17,7 @@ class spaceship
 
         this.level = 1;
         this.exp = 0;
-        this.max_exp = 20;
+        this.max_exp = 30;
         this.coin = 0;
 
         this.hp = health;
@@ -79,14 +79,20 @@ class spaceship
         translate( this.position.x, this.position.y );
         rotate( this.velocity.getAngle() );
         noStroke();
-        image( player_spaceship_img, 0, 0, 80, 80 );
+        if ( this.team == 0 )
+            image( player_spaceship_img, 0, 0, 80, 80 );
+        else
+            image( enemy_spaceship_img, 0, 0, 80, 80 );
         pop();
 
         // hit box
         push();
         noFill();
         strokeWeight( 3 );
-        stroke( "red" );
+        if ( this.team == 0 )
+            stroke( "blue" );
+        else
+            stroke( "red" );
         circle( this.position.x, this.position.y, this.diameter * 2 );
         pop();
     }
@@ -127,10 +133,10 @@ class spaceship
         rectMode( CORNER );
         rect( width / 4 - 100, height * 19 / 20 - 15, map( this.exp, 0, this.max_exp, 0, 200 ), 30 );
         push();
-        fill(0);
-        textAlign(CENTER,CENTER);
-        textSize(30);
-        text(this.exp + " / " + this.max_exp, width / 4 ,height * 19 / 20);
+        fill( 0 );
+        textAlign( CENTER, CENTER );
+        textSize( 30 );
+        text( this.exp + " / " + this.max_exp, width / 4, height * 19 / 20 );
         pop();
 
         // hp bar
@@ -143,10 +149,10 @@ class spaceship
         rectMode( CORNER );
         rect( width / 4.5 - 135, height * 17.5 / 20 - 15, map( this.hp, 0, this.max_hp, 0, 270 ), 30 );
         push();
-        fill(0);
-        textAlign(CENTER,CENTER);
-        textSize(30);
-        text(this.hp + " / " + this.max_hp, width / 4.5 ,height * 17.5 / 20);
+        fill( 0 );
+        textAlign( CENTER, CENTER );
+        textSize( 30 );
+        text( this.hp + " / " + this.max_hp, width / 4.5, height * 17.5 / 20 );
         pop();
 
         // coordinate
@@ -170,7 +176,7 @@ class spaceship
         }
     }
 
-    reward(player)
+    reward( player )
     {
         player.coin += this.level * 10;
         player.exp += this.level * 10;

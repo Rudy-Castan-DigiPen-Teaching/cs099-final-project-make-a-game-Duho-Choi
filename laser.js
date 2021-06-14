@@ -23,7 +23,10 @@ class laser
         this.position.addTo( this.velocity );
 
         push();
-        stroke( '#E1411F' );
+        if(this.team == 0)
+            stroke( "#00F3FF" );
+        else
+            stroke( "#E1411F" );
         strokeWeight( 2 );
         line( this.position.x, this.position.y, this.position.x - this.velocity.x * 4, this.position.y - this
             .velocity.y * 4 );

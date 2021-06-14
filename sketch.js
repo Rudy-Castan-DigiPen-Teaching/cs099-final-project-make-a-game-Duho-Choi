@@ -12,11 +12,12 @@ let player_camera;
 // player & enemies
 let player;
 let player_laser = [];
+let player_upgrade = [];
 let enemy = [];
 let enemy_laser = [];
 
 // shop
-let main_shop;
+let main_base;
 
 let blast_interval;
 
@@ -26,24 +27,24 @@ function setup()
     imageMode( CENTER );
 
     // buttons
-    start_button = new button( width / 2, height / 2 + 100, 300, 60 );
+    start_button = new button( width * 4 / 5, height / 2 + 150, 300, 60 );
     play_button = new button( width / 2, height / 11, 300, 60 );
-    options_button = new button( width / 2, height / 2 + 200, 300, 60 );
-    credits_button = new button( width / 2, height / 2 + 300, 300, 60 );
+    options_button = new button( width * 4 / 5, height / 2 + 250, 300, 60 );
+    credits_button = new button( width * 4 / 5, height / 2 + 350, 300, 60 );
 
     return_main_button = new button( width / 13, height / 12, 50, 50 );
     return_game_button = new button( width / 13, height / 12, 50, 50 );
 
-    levelup_button1 = new button( width / 5, height / 2, 250, 450 );
-    levelup_button2 = new button( width / 2, height / 2, 250, 450 );
-    levelup_button3 = new button( width * 4 / 5, height / 2, 250, 450 );
-
+    levelup_button1 = new button( width / 5, height / 2, 300, 600 );
+    levelup_button2 = new button( width / 2, height / 2, 300, 600 );
+    levelup_button3 = new button( width * 4 / 5, height / 2, 300, 600 );
 
     // camera
     player_camera = new Camera();
 
     // player
     player = new spaceship( 0, 0, 30 );
+    player.fireDmg = 50;
 
     // enemy
     enemy.push( new spaceship( 100, height / 2, 30, 50 ) );
@@ -52,7 +53,9 @@ function setup()
     enemy.push( new spaceship( -300, height / 2 - 100, 30, 50 ) );
     enemy[ 3 ].velocity.setAngle( radians( 180 ) );
 
-    main_shop = new shop( -500, -500 );
+    // base
+    main_base = new base( -500, -500 );
+
 }
 
 function draw()
@@ -126,7 +129,7 @@ function draw()
         player_camera.beginDraw();
 
         // update shop
-        main_shop.draw();
+        main_base.draw();
 
         // update enemies
         for ( let i = 0; i < enemy.length; i++ )
@@ -193,16 +196,16 @@ function draw()
         // update player
         player.update();
         player.draw_interface();
-        if ( player.position.x > main_shop.x - main_shop.width / 2 && player.position.x < main_shop.x + main_shop
+        if ( player.position.x > main_base.x - main_base.width / 2 && player.position.x < main_base.x + main_base
             .width / 2 &&
-            player.position.y > main_shop.y - main_shop.height / 2 && player.position.y < main_shop.y + main_shop
+            player.position.y > main_base.y - main_base.height / 2 && player.position.y < main_base.y + main_base
             .height / 2 && current_screen == game_screen )
             enter_shop();
+
+        // player level up
         if ( player.exp == player.max_exp )
         {
-            player.level += 1;
-            player.exp = 0;
-            player.max_exp += 30;
+            level_up();
         }
 
         break;
@@ -210,15 +213,30 @@ function draw()
         // level up screen
     case level_up_screen:
 
-        levelup_button1.draw();
-        levelup_button2.draw();
-        levelup_button3.draw();
+        levelup_button1.draw( upgrade1 );
+        levelup_button2.draw( upgrade2 );
+        levelup_button3.draw( upgrade3 );
+        if ( levelup_button1.clicked() )
+        {
+            player_upgrade[ player.level - 2 ] = upgrade1;
+            current_screen = game_screen;
+        }
+        else if ( levelup_button2.clicked() )
+        {
+            player_upgrade[ player.level - 2 ] = upgrade2;
+            current_screen = game_screen;
+        }
+        else if ( levelup_button3.clicked() )
+        {
+            player_upgrade[ player.level - 2 ] = upgrade2;
+            current_screen = game_screen;
+        }
 
         break;
 
         // shop screen
     case shop_screen:
-        main_shop.draw_interface(player);
+        main_base.draw_interface( player );
 
         break;
     }
@@ -234,9 +252,9 @@ function draw()
         }
     }
 
-    // if current screen is level up screen or shop screen,
+    // if current screen is shop screen,
     // draw return game button
-    else if ( current_screen > game_screen )
+    else if ( current_screen > game_screen && current_screen != level_up_screen )
     {
         return_game_button.draw( '◁' );
         if ( return_game_button.clicked() )
@@ -254,12 +272,7 @@ function player_blastLaser()
 function enemy_blastLaser()
 {
     for ( let i = 0; i < enemy.length; i++ )
-    {
-        if ( enemy[ i ].hp > 0 )
-        {
-            enemy_laser.push( new laser( enemy[ i ], enemy[ i ].fireDmg ) );
-        }
-    }
+        enemy_laser.push( new laser( enemy[ i ], enemy[ i ].fireDmg ) );
 }
 
 // press space bar = shooting laser 
@@ -270,7 +283,6 @@ function keyPressed()
     {
         setTimeout( player_blastLaser, 0 );
         blast_interval = setInterval( player_blastLaser, fireRate );
-
         setTimeout( enemy_blastLaser, 0 );
     }
 }
@@ -289,12 +301,27 @@ function keyReleased()
     }
 }
 
+// entering shop
 function enter_shop()
 {
-    player.position.x = main_shop.x + main_shop.width * 2;
-    player.position.y = main_shop.y;
+    player.position.x = main_base.x + main_base.width * 2;
+    player.position.y = main_base.y;
     player.velocity.setLength( 0 );
     player.velocity.setAngle( 0 );
     player.acceleration.setLength( 0 );
     current_screen = shop_screen;
+}
+
+// level up
+function level_up()
+{
+    player.level += 1;
+    player.exp = 0;
+    player.max_exp += 30;
+    player.velocity.setLength( 0 );
+    current_screen = level_up_screen;
+
+    upgrade1 = int( random( 0, 10 ) );
+    upgrade2 = int( random( 0, 10 ) );
+    upgrade3 = int( random( 0, 10 ) );
 }
