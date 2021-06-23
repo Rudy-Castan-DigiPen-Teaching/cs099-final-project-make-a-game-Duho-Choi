@@ -10,7 +10,7 @@ class laser
         this.position = new Vec2( shooter.position.x, shooter.position.y );
         this.velocity = new Vec2( shooter.velocity.x, shooter.velocity.y );
         this.team = shooter.team;
-        this.laser_spd = 5 + shooter.velocity.getLength();
+        this.laser_spd = 10 + shooter.velocity.getLength();
         this.dmg = damage;
         this.collide = false;
     }
@@ -19,17 +19,17 @@ class laser
     {
         this.velocity.setAngle( this.velocity.getAngle() );
         this.velocity.setLength( this.laser_spd );
-
         this.position.addTo( this.velocity );
 
         push();
-        if(this.team == 0)
+        translate( this.position.x, this.position.y );
+        rotate( this.velocity.getAngle() );
+        if ( this.team == 0 )
             stroke( "#00F3FF" );
         else
             stroke( "#E1411F" );
-        strokeWeight( 2 );
-        line( this.position.x, this.position.y, this.position.x - this.velocity.x * 4, this.position.y - this
-            .velocity.y * 4 );
+        strokeWeight( 2.5 );
+        line( 10, 0, -35, 0 );
         pop();
     }
 

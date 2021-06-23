@@ -3,9 +3,23 @@
 // Course     : CS099
 // Spring 2021
 
+// upgrade level
+let spd_level = 5;
+let dmg_level = 0;
+let rate_level = 10;
+let hp_level = 0;
+let armor_level = 0;
+let barrier_level = 0;
+
+// level up gadget
+let upgrade_list = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ];
+let upgrade1;
+let upgrade2;
+let upgrade3;
+
 class spaceship
 {
-    constructor( starting_x, starting_y, length, health = 50 )
+    constructor( starting_x, starting_y, length, lev = 1, enemy = 1 )
     {
         this.position = new Vec2( starting_x, starting_y );
         this.velocity = new Vec2( 0, 0 );
@@ -13,15 +27,15 @@ class spaceship
         this.acceleration = new Vec2( 0, 0 );
 
         // 0 = player, 1 = enemy
-        this.team = 0;
+        this.team = enemy;
 
-        this.level = 1;
+        this.level = lev;
         this.exp = 0;
         this.max_exp = 30;
         this.coin = 0;
 
-        this.hp = health;
-        this.max_hp = health;
+        this.hp = 50;
+        this.max_hp = 50;
 
         this.fireDmg = 10;
         this.fireRate = 4;
@@ -30,6 +44,8 @@ class spaceship
         this.barrier = 0;
 
         this.speed_max = 5;
+        this.handle = 0.1;
+        this.accel = 0.5;
 
         this.diameter = length;
     }
@@ -38,38 +54,40 @@ class spaceship
     {
         this.position.addTo( this.velocity );
         this.velocity.setLength( this.acceleration.getLength() + this.velocity.getLength() );
+
         if ( this.velocity.getLength() > this.speed_max )
         {
             this.velocity.setLength( this.speed_max );
         }
-        else if ( this.velocity.getLength < 0 )
+        else if ( this.velocity.getLength < 0.01 )
         {
-            this.velocity.setLength( 0 );
+            this.velocity.setLength( 0.01 );
         }
 
-        if ( keyIsPressed && this.team == 0 )
+        if ( this.team == 0 && current_screen == game_screen )
         {
             // key w = move forward
             if ( keyIsDown( 87 ) )
             {
-                this.acceleration.x = 0.1;
+                this.acceleration.x = this.accel;
+            }
+            else
+            {
+                this.acceleration.x = 0;
+                if ( this.velocity.getLength() > this.accel + 0.01 )
+                    this.velocity.setLength( this.velocity.getLength() - this.accel );
             }
             // key a = turn left
             if ( keyIsDown( 65 ) )
             {
-                this.velocity.setAngle( this.velocity.getAngle() - 0.05 );
+                this.velocity.setAngle( this.velocity.getAngle() - this.handle );
             }
             // key d = turn right
             if ( keyIsDown( 68 ) )
             {
-                this.velocity.setAngle( this.velocity.getAngle() + 0.05 );
+                this.velocity.setAngle( this.velocity.getAngle() + this.handle );
             }
         }
-    }
-
-    backward()
-    {
-        this.acceleration.x = -0.1;
     }
 
     draw()
@@ -80,9 +98,19 @@ class spaceship
         rotate( this.velocity.getAngle() );
         noStroke();
         if ( this.team == 0 )
-            image( player_spaceship_img, 0, 0, 80, 80 );
+            image( player_spaceship_img, 0, 0, this.diameter * 8 / 3, this.diameter * 8 / 3 );
         else
-            image( enemy_spaceship_img, 0, 0, 80, 80 );
+            image( enemy_spaceship_img, 0, 0, this.diameter * 8 / 3, this.diameter * 8 / 3 );
+
+        // booster
+        if ( this.velocity.getLength() > 3 )
+        {
+            imageMode( CENTER );
+            if ( this.team == 0 )
+            {
+                image( boost_img, -this.diameter * 7 / 3, 0, 100, 40 );
+            }
+        }
         pop();
 
         // hit box
@@ -171,14 +199,14 @@ class spaceship
 
         if ( distance < this.diameter && laser.collide == false && this.team != laser.team )
         {
-            this.hp -= laser.dmg;
+            this.hp -= laser.dmg * ( ( 100 - this.armor ) / 100 );
             laser.collide = true;
         }
     }
 
-    reward( player )
+    reward( p )
     {
-        player.coin += this.level * 10;
-        player.exp += this.level * 10;
+        p.coin += this.level * 30;
+        p.exp += this.level * 30;
     }
 }
