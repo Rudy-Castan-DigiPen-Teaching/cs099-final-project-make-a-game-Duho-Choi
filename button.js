@@ -84,13 +84,13 @@ class button
             push();
             noStroke();
             fill( 0 );
-            imageMode(CENTER);
-            image(upgrade_img[0],this.x-10,this.y - 160,200,200);
+            imageMode( CENTER );
+            image( upgrade_img[ 0 ], this.x - 10, this.y - 160, 200, 200 );
             textAlign( CENTER, TOP );
             textSize( 45 );
-            text( "Double Shot", this.x, this.y-50 );
+            text( "Double Shot", this.x, this.y - 30 );
             textSize( 22 );
-            text("Shoot two lasers at once.",this.x,this.y);
+            text( "Shoot two lasers at once\nTwo lasers will move in\n parallel.", this.x, this.y + 100 );
             pop();
 
             break;
@@ -102,13 +102,13 @@ class button
             push();
             noStroke();
             fill( 0 );
-            imageMode(CENTER);
-            image(upgrade_img[1],this.x,this.y - 160,200,200);
+            imageMode( CENTER );
+            image( upgrade_img[ 1 ], this.x, this.y - 160, 200, 200 );
             textAlign( CENTER, TOP );
-            textSize( 50 );
-            text( "Barrier", this.x, this.y - 55 );
-            textSize(22);
-            text("Protect player from attack.\nCharge barrier again when ",this.x,this.y);
+            textSize( 45 );
+            text( "Barrier", this.x, this.y - 30 );
+            textSize( 22 );
+            text( "Protect player from attack\nCharge barrier again when\nplayer doesn't get damaged\n for a while", this.x, this.y + 80 );
             pop();
 
             break;
@@ -120,9 +120,13 @@ class button
             push();
             noStroke();
             fill( 0 );
+            imageMode( CENTER );
+            image( upgrade_img[ 1 ], this.x, this.y - 160, 200, 200 );
             textAlign( CENTER, TOP );
-            textSize( 20 );
-            text( "3", this.x, this.y );
+            textSize( 45 );
+            text( "Missile Turret", this.x, this.y - 30 );
+            textSize( 22 );
+            text( "Shooting missile when\nmouse left button is pressed\nMissile has 1.5X damage of\nyour laser damage.", this.x, this.y + 90 );
             pop();
 
             break;
@@ -134,9 +138,13 @@ class button
             push();
             noStroke();
             fill( 0 );
+            imageMode(CENTER);
+            image(upgrade_img[3],this.x,this.y - 160,200,200);
             textAlign( CENTER, TOP );
-            textSize( 20 );
-            text( "4", this.x, this.y );
+            textSize( 50 );
+            text( "Invincibility", this.x, this.y - 30 );
+            textSize(22);
+            text("After player damaged,\nplayer became invincible\nfor a second",this.x,this.y + 100);
             pop();
 
             break;
@@ -148,37 +156,49 @@ class button
             push();
             noStroke();
             fill( 0 );
+            imageMode(CENTER);
+            image(upgrade_img[4],this.x-10,this.y - 160,200,200);
             textAlign( CENTER, TOP );
-            textSize( 20 );
-            text( "5", this.x, this.y );
+            textSize( 50 );
+            text( "Critical Shot", this.x, this.y - 30 );
+            textSize(22);
+            text("Deals double damage\noccasionally when shooting\nenemy (30% Chance)",this.x,this.y + 100);
             pop();
 
             break;
 
-            // upgrade 6 : Guardian
+            // upgrade 6 : Heavy Armor
         case 6:
             this.draw_button();
 
             push();
             noStroke();
             fill( 0 );
+            imageMode(CENTER);
+            image(upgrade_img[1],this.x,this.y - 160,200,200);
             textAlign( CENTER, TOP );
-            textSize( 20 );
-            text( "6", this.x, this.y );
+            textSize( 48 );
+            text( "Heavy Armor", this.x, this.y - 30 );
+            textSize(22);
+            text("Gain additional armor, but\nbecome slower\n(+20 armor, -3 speed)",this.x,this.y + 100);
             pop();
 
             break;
 
-            // upgrade 7 : Laser cannon
+            // upgrade 7 : Double HP
         case 7:
             this.draw_button();
 
             push();
             noStroke();
             fill( 0 );
+            imageMode( CENTER );
+            image( upgrade_img[ 6 ], this.x, this.y - 160, 200, 200 );
             textAlign( CENTER, TOP );
-            textSize( 20 );
-            text( "7", this.x, this.y );
+            textSize( 45 );
+            text( "HP up", this.x, this.y - 30 );
+            textSize( 22 );
+            text( "Double your maximum HP", this.x , this.y + 120 );
             pop();
 
             break;
@@ -187,13 +207,15 @@ class button
         case 8:
             this.draw_button();
 
-            push();
             noStroke();
             fill( 0 );
+            imageMode(CENTER);
+            image(upgrade_img[1],this.x,this.y - 160,200,200);
             textAlign( CENTER, TOP );
-            textSize( 20 );
-            text( "8", this.x, this.y );
-            pop();
+            textSize( 50 );
+            text( "Critical Shot", this.x, this.y - 30 );
+            textSize(22);
+            text("Deals double damage\noccasionally when shooting\nenemy (30% Chance)",this.x,this.y + 100);
 
             break;
 

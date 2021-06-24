@@ -4,7 +4,7 @@
 // Spring 2021
 
 // current screen
-let current_screen = 0;
+let current_screen = 2;
 
 // camera
 let player_camera;
@@ -15,7 +15,7 @@ let player_laser = [];
 let player_upgrade = [];
 let enemy = [];
 let enemy_laser = [];
-const max_enemy = 6;
+const max_enemy = 7;
 
 // shop
 let main_base;
@@ -117,16 +117,19 @@ function draw()
         textAlign( LEFT, TOP );
         textSize( 19 );
         image( player_spaceship_img, width / 8.5, height / 4, 110, 110 );
-        text( "◁ This is your spaceship. You are now running \nout from cruel space empire. You have to\nsurvive from empire's spacecrafts' chase!", width / 5.8 , height / 5 );
-        image(keyboard_img,width * 1.85/3,height/4,220);
-        text("You can control your spaceship with keyboard",width * 2.35/4,height/5);
-        text("W,A,D and SpaceKey.\nThrust with W,\nTurn left / right with A / D,\nand shoot laser with Space key.",width * 2.85/4,height/4.3);
+        text( "◁ This is your spaceship. You are now running \nout from cruel space empire. You have to\nsurvive from empire's spacecrafts' chase!",
+            width / 5.8, height / 5 );
+        image( keyboard_img, width * 1.85 / 3, height / 4, 220 );
+        text( "You can control your spaceship with keyboard", width * 2.35 / 4, height / 5 );
+        text( "W,A,D and SpaceKey.\nThrust with W,\nTurn left / right with A / D,\nand shoot laser with Space key.",
+            width * 2.85 / 4, height / 4.3 );
         push();
-        translate(width/2.2,height/2.7);
-        rotate(PI);
-        image( enemy_spaceship_img,0,0,110,110);
+        translate( width / 2.2, height / 2.7 );
+        rotate( PI );
+        image( enemy_spaceship_img, 0, 0, 110, 110 );
         pop();
-        text("▷ That's enemy spaceship. It will keep\nfollowing you and blasting lasers. You have\nto shoot and kill them with your laser!",width/15,height/3);
+        text( "▷ That's enemy spaceship. It will keep\nfollowing you and blasting lasers. You have\nto shoot and kill them with your laser!",
+            width / 15, height / 3 );
         text( "This is your base. You can get to your base\nand upgrade your ship's ability whenever you want.\nYou need to pay coins when upgrading your ship",
             width / 2, height / 2 );
         pop();
@@ -246,14 +249,29 @@ function draw()
         // if player laser collide with object, delete laser
         for ( let i = player_laser.length - 1; i >= 0; --i )
         {
+            const distance_from_player = sqrt( ( player_laser[ i ].position.x - player.position.x ) * ( player_laser[
+                i ].position.x - player.position.x ) + ( player_laser[ i ].position.y - player.position.y ) * (
+                player_laser[ i ].position.y - player.position.y ) );
             if ( player_laser[ i ].collide == true )
                 player_laser.splice( i, 1 );
+
+            // if player laser far from player, delete 
+            else if ( distance_from_player > 3000 )
+                player_laser.splice( i, 1 );
+
         }
 
         // if enemy laser collide with object, delete laser
         for ( let i = enemy_laser.length - 1; i >= 0; --i )
         {
             if ( enemy_laser[ i ].collide == true )
+                enemy_laser.splice( i, 1 );
+
+            // if player laser far from player, delete laser
+            const distance_from_player = sqrt( ( enemy_laser[ i ].position.x - player.position.x ) * ( enemy_laser[
+                i ].position.x - player.position.x ) + ( enemy_laser[ i ].position.y - player.position.y ) * (
+                enemy_laser[ i ].position.y - player.position.y ) )
+            if ( distance_from_player > 3000 )
                 enemy_laser.splice( i, 1 );
         }
 
@@ -287,7 +305,7 @@ function draw()
     case level_up_screen:
 
         push();
-        textAlign( CENTER, TOP )
+        textAlign( CENTER, TOP );
         noStroke();
         fill( 255 );
         textSize( 70 );
@@ -295,6 +313,9 @@ function draw()
         pop();
 
         // choose upgrade buttons
+        levelup_button1.type = 5;
+        levelup_button2.type = 6;
+        levelup_button3.type = 4;
         levelup_button1.draw();
         levelup_button2.draw();
         levelup_button3.draw();
@@ -357,10 +378,9 @@ function player_blastLaser()
     player_laser.push( new laser( player, player.fireDmg ) );
 }
 
-function enemy_blastLaser()
+function enemy_blastLaser( i )
 {
-    for ( let i = 0; i < enemy.length; i++ )
-        enemy_laser.push( new laser( enemy[ i ], enemy[ i ].fireDmg ) );
+    enemy_laser.push( new laser( enemy[ i ], enemy[ i ].fireDmg ) );
 }
 
 // press space bar = shooting laser 
@@ -410,7 +430,7 @@ function upgrade()
 }
 
 // upgrade enemies
-function upgrade_enemies()
+function enemy_upgrade()
 {
 
 }

@@ -33,5 +33,4 @@ class laser
         pop();
     }
 
-
 }

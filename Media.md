@@ -15,8 +15,7 @@ Get it from https://opengameart.org/content/keyboard-keys-1.
 
 ### These follows CC0 license.
 
-CC0 1.0 Universal (CC0 1.0)
-Public Domain Dedication
+#### CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
 This is a human-readable summary of the Legal Code (read the full text). Disclaimer
 No Copyright
 The person who associated a work with this deed has dedicated the work to the public domain by waiving all of his or her rights to the work worldwide under copyright law, including all related and neighboring rights, to the extent allowed by law.
@@ -26,7 +25,7 @@ You can copy, modify, distribute and perform the work, even for commercial purpo
 
 
 ## spaceship_player.png : 
-Edited color thanks to Chaerin Park, modificated from spaceship_enemy.png.
+Edit color thanks to Chaerin Park, modificated from spaceship_enemy.png.
 
 ## spaceship_enemy.png : 
 Get it from - https://opengameart.org/content/set-faction10-spaceships, made by MillionthVector.
@@ -37,7 +36,7 @@ Edited color, original version from https://opengameart.org/content/homemade-fla
 
 ### These follows CC-BY 3.0 license.
 
-Attribution 3.0 Unported (CC BY 3.0)
+#### Attribution 3.0 Unported (CC BY 3.0)
 You are free to:
 Share — copy and redistribute the material in any medium or format
 Adapt — remix, transform, and build upon the material
@@ -55,8 +54,7 @@ Get it from https://opengameart.org/content/cc0-scraps.
     
 ### These follows CC0 license.
 
-CC0 1.0 Universal (CC0 1.0)
-Public Domain Dedication
+#### CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
 This is a human-readable summary of the Legal Code (read the full text). Disclaimer
 No Copyright
 The person who associated a work with this deed has dedicated the work to the public domain by waiving all of his or her rights to the work worldwide under copyright law, including all related and neighboring rights, to the extent allowed by law.

@@ -28,6 +28,9 @@ function preload()
     boost_img = loadImage( 'assets/boost_flame.png' );
     upgrade_img[ 0 ] = loadImage( 'assets/DoubleShot.png' );
     upgrade_img[ 1 ] = loadImage( 'assets/Barrier.png' );
+    upgrade_img[ 3 ] = loadImage( 'assets/Invincible.png' );
+    upgrade_img[ 4 ] = loadImage( 'assets/Critical.png' );
+    upgrade_img[ 6 ] = loadImage( 'assets/HPup.png' );
 
     background_img = loadImage( 'assets/Background-0.jpg' );
     game_background_img = loadImage( 'assets/Background-2.jpg' );
