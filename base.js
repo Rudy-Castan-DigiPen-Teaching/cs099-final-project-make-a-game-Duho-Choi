@@ -46,7 +46,7 @@ class base
         text( "HP  Lv. " + hp_level + "\nCurrent Status : " + player.max_hp, width / 40, height / 2 - 220 );
         text( "Attack DMG  Lv. " + dmg_level + "\nCurrent Status : " + player.fireDmg, width / 40, height / 2 -
             110 );
-        text( "Fire Rate  Lv. " + rate_level + "\nCurrent Status : " + player.fireRate, width / 40, height / 2 );
+        text( "Fire Rate  Lv. " + fire_rate_level + "\nCurrent Status : " + player.fireRate, width / 40, height / 2 );
         text( "Max Speed  Lv. " + spd_level + "\nCurrent Status : " + player.speed_max, width / 40, height / 2 +
             110 );
         text( "Armor  Lv. " + armor_level + "\nCurrent Status : " + player.armor + "%", width / 40, height / 2 + 220 );
@@ -66,7 +66,7 @@ class base
             rect( width / 2 + 20 + 55 * i, height / 2 - 110, 35, 70 );
         }
         // fire rate
-        for ( let i = 0; i < rate_level; i++ )
+        for ( let i = 0; i < fire_rate_level; i++ )
         {
             rect( width / 2 + 20 + 55 * i, height / 2 + 0, 35, 70 );
         }
@@ -96,7 +96,7 @@ class base
         {
             rect( width / 2 + 20 + 55 * j, height / 2 - 110, 35, 70 );
         }
-        for ( let j = rate_level; j < 10; j++ )
+        for ( let j = fire_rate_level; j < 10; j++ )
         {
             rect( width / 2 + 20 + 55 * j, height / 2, 35, 70 );
         }

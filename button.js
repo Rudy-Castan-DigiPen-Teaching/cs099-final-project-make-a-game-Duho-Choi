@@ -84,11 +84,13 @@ class button
             push();
             noStroke();
             fill( 0 );
+            imageMode(CENTER);
+            image(upgrade_img[0],this.x-10,this.y - 160,200,200);
             textAlign( CENTER, TOP );
-            textSize( 50 );
-            text( "Double Shot", this.x, this.y+25 );
-            textSize( 40 );
-            text("Shoot two lasers at once.");
+            textSize( 45 );
+            text( "Double Shot", this.x, this.y-50 );
+            textSize( 22 );
+            text("Shoot two lasers at once.",this.x,this.y);
             pop();
 
             break;
@@ -100,11 +102,13 @@ class button
             push();
             noStroke();
             fill( 0 );
+            imageMode(CENTER);
+            image(upgrade_img[1],this.x,this.y - 160,200,200);
             textAlign( CENTER, TOP );
             textSize( 50 );
-            text( "Barrier", this.x, this.y );
-            textSize(40);
-            text("Protect player from attack. Charge barrier again when ");
+            text( "Barrier", this.x, this.y - 55 );
+            textSize(22);
+            text("Protect player from attack.\nCharge barrier again when ",this.x,this.y);
             pop();
 
             break;

@@ -26,7 +26,8 @@ function preload()
     base_img = loadImage( 'assets/station.png' );
     coin_img = loadImage( 'assets/coin.png' );
     boost_img = loadImage( 'assets/boost_flame.png' );
-    upgrade_img.push( 'assets/shopStation.png' );
+    upgrade_img[ 0 ] = loadImage( 'assets/DoubleShot.png' );
+    upgrade_img[ 1 ] = loadImage( 'assets/Barrier.png' );
 
     background_img = loadImage( 'assets/Background-0.jpg' );
     game_background_img = loadImage( 'assets/Background-2.jpg' );

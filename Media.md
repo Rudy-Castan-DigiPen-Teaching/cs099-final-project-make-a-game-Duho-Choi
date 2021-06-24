@@ -26,7 +26,7 @@ You can copy, modify, distribute and perform the work, even for commercial purpo
 
 
 ## spaceship_player.png : 
-Edited color, modificated from spaceship_enemy.png.
+Edited color thanks to Chaerin Park, modificated from spaceship_enemy.png.
 
 ## spaceship_enemy.png : 
 Get it from - https://opengameart.org/content/set-faction10-spaceships, made by MillionthVector.

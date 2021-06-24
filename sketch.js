@@ -166,15 +166,15 @@ function draw()
         push();
         imageMode( CENTER );
         image( background_img, width / 2, height / 2, width, height );
-        pop();
 
         // text box
-        push();
         rectMode( CENTER );
         noStroke();
         fill( 0, 200 );
         rect( width / 2, height / 2 + 30, width * 9 / 10, height * 4 / 5, 50 );
         pop();
+
+        push();
 
         break;
 
@@ -312,7 +312,7 @@ function draw()
         }
         else if ( levelup_button3.clicked() )
         {
-            player_upgrade[ player_upgrade.length ] = upgrade2;
+            player_upgrade[ player_upgrade.length ] = upgrade3;
             current_screen = game_screen;
         }
 
@@ -403,10 +403,10 @@ function enter_shop()
 function upgrade()
 {
     player.max_hp = 50 + 150 * hp_level;
-    player.fireDmg = 10 + 20 * dmg_level;
-    player.fireRate = 3 + 0.7 * rate_level;
+    player.fireDmg = 30 + 25 * dmg_level;
+    player.fireRate = 4 + 0.6 * fire_rate_level;
     player.speed_max = 5 + 1 * spd_level;
-    player.armor = 5 + 1 * armor_level;
+    player.armor = 5 * armor_level;
 }
 
 // upgrade enemies
@@ -474,7 +474,8 @@ function head_to_player()
         // if enemy is too close to player, slow down
         let dist = sqrt( ( player.position.x - enemy[ i ].position.x ) * ( player.position.x - enemy[ i ].position.x ) +
             ( player.position.y - enemy[ i ].position.y ) * ( player.position.y - enemy[ i ].position.y ) );
-        if ( dist > 400 )
+
+        if ( dist > 350 )
             enemy[ i ].velocity.setLength( enemy[ i ].speed_max );
         else
             enemy[ i ].velocity.setLength( 0.3 );

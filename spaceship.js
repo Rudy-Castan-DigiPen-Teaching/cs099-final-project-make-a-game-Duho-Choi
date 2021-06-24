@@ -6,7 +6,7 @@
 // upgrade level
 let spd_level = 5;
 let dmg_level = 0;
-let rate_level = 10;
+let fire_rate_level = 10;
 let hp_level = 0;
 let armor_level = 0;
 let barrier_level = 0;
@@ -44,7 +44,7 @@ class spaceship
         this.barrier = 0;
 
         this.speed_max = 5;
-        this.handle = 0.1;
+        this.angleOffset = 0.1;
         this.accel = 0.5;
 
         this.diameter = length;
@@ -80,12 +80,12 @@ class spaceship
             // key a = turn left
             if ( keyIsDown( 65 ) )
             {
-                this.velocity.setAngle( this.velocity.getAngle() - this.handle );
+                this.velocity.setAngle( this.velocity.getAngle() - this.angleOffset );
             }
             // key d = turn right
             if ( keyIsDown( 68 ) )
             {
-                this.velocity.setAngle( this.velocity.getAngle() + this.handle );
+                this.velocity.setAngle( this.velocity.getAngle() + this.angleOffset );
             }
         }
     }
