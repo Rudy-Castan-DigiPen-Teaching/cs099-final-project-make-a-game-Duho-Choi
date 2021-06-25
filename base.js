@@ -46,10 +46,12 @@ class base
         text( "HP  Lv. " + hp_level + "\nCurrent Status : " + player.max_hp, width / 40, height / 2 - 220 );
         text( "Attack DMG  Lv. " + dmg_level + "\nCurrent Status : " + player.fireDmg, width / 40, height / 2 -
             110 );
-        text( "Fire Rate  Lv. " + fire_rate_level + "\nCurrent Status : " + player.fireRate, width / 40, height / 2 );
+        text( "Fire Rate  Lv. " + fire_rate_level + "\nCurrent Status : " + player.fireRate, width / 40, height /
+            2 );
         text( "Max Speed  Lv. " + spd_level + "\nCurrent Status : " + player.speed_max, width / 40, height / 2 +
             110 );
-        text( "Armor  Lv. " + armor_level + "\nCurrent Status : " + player.armor + "%", width / 40, height / 2 + 220 );
+        text( "Armor  Lv. " + armor_level + "\nCurrent Status : " + player.armor + "%", width / 40, height / 2 +
+            220 );
 
         // current upgrade
         strokeWeight( 5 );
@@ -80,11 +82,6 @@ class base
         {
             rect( width / 2 + 20 + 55 * i, height / 2 + 220, 35, 70 );
         }
-        for ( let i = 0; i < armor_level; i++ )
-        {
-            rect( width / 2 + 20 + 55 * i, height / 2 + 330, 35, 70 );
-        }
-
         // upgrade capacity
         stroke( "#ffcc66" );
         fill( "#ff9933" );
@@ -108,37 +105,49 @@ class base
         {
             rect( width / 2 + 20 + 55 * j, height / 2 + 220, 35, 70 );
         }
-        for ( let j = armor_level; j < 10; j++ )
-        {
-            rect( width / 2 + 20 + 55 * j, height / 2 + 330, 35, 70 );
-        }
         pop();
 
         // upgrade buttons
-        for(let i = 0 ; i < 6 ; i ++)
+        for ( let i = 0; i < 6; i++ )
         {
-            switch(i)
+            switch ( i )
             {
-                case 0:
-                    shop_button[i].draw("Upgrade\nCost : ",28);
-                    break;
-                case 1:
-                    shop_button[i].draw("Upgrade\nCost : ",28);
-                    break;
-                case 2:
-                    shop_button[i].draw("Upgrade\nCost : ",28);
-                    break;
-                case 3:
-                    shop_button[i].draw("Upgrade\nCost : ",28);
-                    break;
-                case 4:
-                    shop_button[i].draw("Upgrade\nCost : ",28);
-                    break;
-                case 5:
-                    shop_button[i].draw("Upgrade\nCost : ",28);
-                    break;
+            case 0:
+                if ( hp_level >= 10 )
+                    shop_button[ i ].draw( "Full Upgrade", 28 );
+                else
+                    shop_button[ i ].draw( "Upgrade\nCost : " + ( 20 + 40 * hp_level ), 28 );
+                break;
+            case 1:
+                if ( dmg_level >= 10 )
+                    shop_button[ i ].draw( "Full Upgrade", 28 );
+                else
+                    shop_button[ i ].draw( "Upgrade\nCost : " + ( 20 + 40 * dmg_level ), 28 );
+                break;
+            case 2:
+                if ( fire_rate_level >= 10 )
+                    shop_button[ i ].draw( "Full Upgrade", 28 );
+                else
+                    shop_button[ i ].draw( "Upgrade\nCost : " + ( 20 + 40 * fire_rate_level ), 28 );
+                break;
+            case 3:
+                if ( spd_level >= 10 )
+                    shop_button[ i ].draw( "Full Upgrade", 28 );
+                else
+                    shop_button[ i ].draw( "Upgrade\nCost : " + ( 20 + 40 * spd_level ), 28 );
+                break;
+            case 4:
+                if ( armor_level >= 10 )
+                    shop_button[ i ].draw( "Full Upgrade", 28 );
+                else
+                    shop_button[ i ].draw( "Upgrade\nCost : " + ( 20 + 40 * armor_level ), 28 );
+                break;
+                // Repair button
+            case 5:
+                shop_button[ i ].draw( "Repair      Cost : " + int(( player.max_hp - player.hp ) / 3), 28 );
+                break;
             }
         }
-
     }
+
 }

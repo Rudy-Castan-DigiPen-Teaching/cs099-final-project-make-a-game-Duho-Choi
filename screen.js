@@ -11,3 +11,4 @@ const shop_screen = 3;
 const help_screen = 10;
 const options_screen = 11;
 const credits_screen = 12;
+const game_over_screen = 100;

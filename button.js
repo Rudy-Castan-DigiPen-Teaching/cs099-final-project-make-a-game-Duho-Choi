@@ -13,7 +13,6 @@ let return_game_button;
 
 let levelup_button1;
 let levelup_button2;
-let levelup_button3;
 
 let shop_button = [];
 
@@ -76,7 +75,7 @@ class button
 
             break;
 
-            // upgrade 1 ~ 10
+            // upgrade 1 ~ 8
             // upgrade 1 : Double Shot
         case 1:
             this.draw_button();
@@ -108,7 +107,8 @@ class button
             textSize( 45 );
             text( "Barrier", this.x, this.y - 30 );
             textSize( 22 );
-            text( "Protect player from attack\nCharge barrier again when\nplayer doesn't get damaged\n for a while", this.x, this.y + 80 );
+            text( "Protect player from attack\nCharge barrier again when\nplayer doesn't get damaged\n for a while",
+                this.x, this.y + 80 );
             pop();
 
             break;
@@ -121,30 +121,32 @@ class button
             noStroke();
             fill( 0 );
             imageMode( CENTER );
-            image( upgrade_img[ 1 ], this.x, this.y - 160, 200, 200 );
+            image( upgrade_img[ 2 ], this.x, this.y - 160, 90, 200 );
             textAlign( CENTER, TOP );
             textSize( 45 );
             text( "Missile Turret", this.x, this.y - 30 );
             textSize( 22 );
-            text( "Shooting missile when\nmouse left button is pressed\nMissile has 1.5X damage of\nyour laser damage.", this.x, this.y + 90 );
+            text( "Shooting missile when\nmouse left button is pressed\nMissile has 1.5X damage of\nyour laser damage",
+                this.x, this.y + 90 );
             pop();
 
             break;
 
-            // upgrade 4 : Invincibility
+            // upgrade 4 : Laser EMP
         case 4:
             this.draw_button();
 
             push();
             noStroke();
             fill( 0 );
-            imageMode(CENTER);
-            image(upgrade_img[3],this.x,this.y - 160,200,200);
+            imageMode( CENTER );
+            image( upgrade_img[ 2 ], this.x, this.y - 160, 200, 200 );
             textAlign( CENTER, TOP );
             textSize( 50 );
-            text( "Invincibility", this.x, this.y - 30 );
-            textSize(22);
-            text("After player damaged,\nplayer became invincible\nfor a second",this.x,this.y + 100);
+            text( "Laser EMP", this.x, this.y - 30 );
+            textSize( 22 );
+            text( "When mouse right button\nclicked, use Laser EMP\nDelete all enemy lasers\n(Cooldown : 20 sec)",
+                this.x, this.y + 100 );
             pop();
 
             break;
@@ -156,13 +158,13 @@ class button
             push();
             noStroke();
             fill( 0 );
-            imageMode(CENTER);
-            image(upgrade_img[4],this.x-10,this.y - 160,200,200);
+            imageMode( CENTER );
+            image( upgrade_img[ 4 ], this.x - 10, this.y - 160, 200, 200 );
             textAlign( CENTER, TOP );
             textSize( 50 );
             text( "Critical Shot", this.x, this.y - 30 );
-            textSize(22);
-            text("Deals double damage\noccasionally when shooting\nenemy (30% Chance)",this.x,this.y + 100);
+            textSize( 22 );
+            text( "Deals double damage\noccasionally when shooting\nenemy (30% Chance)", this.x, this.y + 100 );
             pop();
 
             break;
@@ -174,13 +176,13 @@ class button
             push();
             noStroke();
             fill( 0 );
-            imageMode(CENTER);
-            image(upgrade_img[1],this.x,this.y - 160,200,200);
+            imageMode( CENTER );
+            image( upgrade_img[ 5 ], this.x, this.y - 160, 200, 200 );
             textAlign( CENTER, TOP );
             textSize( 48 );
             text( "Heavy Armor", this.x, this.y - 30 );
-            textSize(22);
-            text("Gain additional armor, but\nbecome slower\n(+20 armor, -3 speed)",this.x,this.y + 100);
+            textSize( 22 );
+            text( "Gain additional armor, but\nbecome slower\n(+20 armor, -2.5 speed)", this.x, this.y + 100 );
             pop();
 
             break;
@@ -198,80 +200,29 @@ class button
             textSize( 45 );
             text( "HP up", this.x, this.y - 30 );
             textSize( 22 );
-            text( "Double your maximum HP", this.x , this.y + 120 );
+            text( "Double your maximum HP", this.x, this.y + 120 );
             pop();
 
             break;
 
-            // upgrade 8 : 
+            // upgrade 8 : Guard
         case 8:
             this.draw_button();
 
-            noStroke();
-            fill( 0 );
-            imageMode(CENTER);
-            image(upgrade_img[1],this.x,this.y - 160,200,200);
-            textAlign( CENTER, TOP );
-            textSize( 50 );
-            text( "Critical Shot", this.x, this.y - 30 );
-            textSize(22);
-            text("Deals double damage\noccasionally when shooting\nenemy (30% Chance)",this.x,this.y + 100);
-
-            break;
-
-            // upgrade 9 : 
-        case 9:
-            this.draw_button();
-
             push();
             noStroke();
             fill( 0 );
+            imageMode( CENTER );
+            image( upgrade_img[ 7 ], this.x, this.y - 160, 180, 150 );
             textAlign( CENTER, TOP );
-            textSize( 20 );
-            text( "9", this.x, this.y );
+            textSize( 45 );
+            text( "Guard Angel", this.x, this.y - 30 );
+            textSize( 22 );
+            text( "Spawn little Guard Angel,\nrotates around player and \nguards approaching lasers", this
+                .x, this.y + 120 );
             pop();
 
             break;
-
-        case 10:
-            this.draw_button();
-
-            push();
-            noStroke();
-            fill( 0 );
-            textAlign( CENTER, TOP );
-            textSize( 20 );
-            text( "10", this.x, this.y );
-            pop();
-
-            break;
-
-        case 11:
-            this.draw_button();
-
-            push();
-            noStroke();
-            fill( 0 );
-            textAlign( CENTER, TOP );
-            textSize( 20 );
-            text( "11", this.x, this.y );
-            pop();
-
-            break;
-
-        case 12:
-            this.draw_button();
-
-            push();
-            noStroke();
-            fill( 0 );
-            textAlign( CENTER, TOP );
-            textSize( 20 );
-            text( "12", this.x, this.y );
-            pop();
-
-            break;
-
         }
 
         pop();
@@ -282,8 +233,11 @@ class button
         const mouseInButton = ( mouseX > this.x - this.width / 2 && mouseX < this.x + this.width / 2 ) && ( mouseY >
             this.y - this.height / 2 && mouseY < this.y + this.height / 2 );
 
-        if ( mouseIsPressed && mouseInButton )
+        if ( mouseIsPressed && mouseInButton && mouseWasPressed == false )
+        {
+            mouseWasPressed = true;
             return true;
+        }
         else
             return false;
     }

@@ -1,7 +1,7 @@
 # Images
 
 ## Background-0.jpg, Background-2.jpg : 
-Get these from https://opengameart.org/content/space-backgrounds-7.
+Added Title in Background-0.jpg, get original version of it and Background-2.jpg from https://opengameart.org/content/space-backgrounds-7.
 
 ## coin.png : 
 Get it from https://opengameart.org/content/coin-2.
@@ -30,8 +30,8 @@ Edit color thanks to Chaerin Park, modificated from spaceship_enemy.png.
 ## spaceship_enemy.png : 
 Get it from - https://opengameart.org/content/set-faction10-spaceships, made by MillionthVector.
 
-## boost_flame.png : 
-Edited color, original version from https://opengameart.org/content/homemade-flame, made by Prinsu-Kun.
+## boost_flame.png, enemy_boost_flame.png : 
+boost_flame.png : Edited color, enemy_boos_flame.png is the original version. Get it from https://opengameart.org/content/homemade-flame, made by Prinsu-Kun.
 
 
 ### These follows CC-BY 3.0 license.
@@ -45,7 +45,7 @@ Under the following terms:
 Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
 
 
-
+---
 # Sounds
 
 ## bgm.mp3 : 

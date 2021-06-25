@@ -4,18 +4,20 @@
 // Spring 2021
 
 // upgrade level
-let spd_level = 5;
+let spd_level = 0;
 let dmg_level = 0;
-let fire_rate_level = 10;
+let fire_rate_level = 0;
 let hp_level = 0;
 let armor_level = 0;
 let barrier_level = 0;
 
 // level up gadget
-let upgrade_list = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ];
+let upgrade_list = [ 1, 2, 3, 4, 5, 6, 7, 8 ];
 let upgrade1;
 let upgrade2;
 let upgrade3;
+
+let player_upgrade = [];
 
 class spaceship
 {
@@ -32,13 +34,15 @@ class spaceship
         this.level = lev;
         this.exp = 0;
         this.max_exp = 30;
-        this.coin = 0;
+        this.coin = 200000000;
 
         this.hp = 50;
         this.max_hp = 50;
 
-        this.fireDmg = 10;
+        this.fireDmg = 5;
         this.fireRate = 4;
+
+        this.shooting_laser = false;
 
         this.armor = 0;
         this.barrier = 0;
@@ -64,6 +68,7 @@ class spaceship
             this.velocity.setLength( 0.01 );
         }
 
+        // moving player
         if ( this.team == 0 && current_screen == game_screen )
         {
             // key w = move forward
@@ -103,12 +108,16 @@ class spaceship
             image( enemy_spaceship_img, 0, 0, this.diameter * 8 / 3, this.diameter * 8 / 3 );
 
         // booster
-        if ( this.velocity.getLength() > 3 )
+        if ( this.velocity.getLength() >= 1.8 )
         {
             imageMode( CENTER );
             if ( this.team == 0 )
             {
                 image( boost_img, -this.diameter * 7 / 3, 0, 100, 40 );
+            }
+            else
+            {
+                image( enemy_boost_img, -this.diameter * 7 / 3, 0, 100, 40 );
             }
         }
         pop();
@@ -206,7 +215,7 @@ class spaceship
 
     reward( p )
     {
-        p.coin += this.level * 30;
-        p.exp += this.level * 30;
+        p.coin += this.level * 10;
+        p.exp += this.level * 20;
     }
 }
