@@ -8,16 +8,16 @@ let spd_level = 0;
 let dmg_level = 0;
 let fire_rate_level = 0;
 let hp_level = 0;
-let armor_level = 0;
-let barrier_level = 0;
+let armor_level = 20;
 
 // level up gadget
 let upgrade_list = [ 1, 2, 3, 4, 5, 6, 7, 8 ];
 let upgrade1;
 let upgrade2;
-let upgrade3;
 
-let player_upgrade = [];
+let barrier_on = false;
+
+let player_upgrade = [ 3 ];
 
 class spaceship
 {
@@ -132,6 +132,17 @@ class spaceship
             stroke( "red" );
         circle( this.position.x, this.position.y, this.diameter * 2 );
         pop();
+
+        // barrier
+        if(this.team == 0 && barrier_on == true)
+        {
+            push();
+            stroke(0,155,255,70);
+            strokeWeight(5);
+            fill(0,255,255,50);
+            circle(this.position.x,this.position.y,this.diameter * 2.8);
+            pop();
+        }
     }
 
     draw_hp()
@@ -210,6 +221,10 @@ class spaceship
         {
             this.hp -= laser.dmg * ( ( 100 - this.armor ) / 100 );
             laser.collide = true;
+            if(this.team == 0 && player_upgrade.includes(2) && barrier_on == true)
+            {
+                setTimeout(barrier_remove,1500);
+            }
         }
     }
 
@@ -218,4 +233,17 @@ class spaceship
         p.coin += this.level * 10;
         p.exp += this.level * 20;
     }
+}
+
+// upgrade 2 - barrier
+function barrier_deploy()
+{
+    barrier_on = true;
+}
+
+function barrier_remove()
+{
+    barrier_on = false;
+    if(barrier_on == false)
+        setTimeout(barrier_deploy,10000);
 }

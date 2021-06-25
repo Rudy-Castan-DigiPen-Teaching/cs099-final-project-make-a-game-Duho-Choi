@@ -107,7 +107,7 @@ class button
             textSize( 45 );
             text( "Barrier", this.x, this.y - 30 );
             textSize( 22 );
-            text( "Protect player from attack\nCharge barrier again when\nplayer doesn't get damaged\n for a while",
+            text( "Protect player from attack \nfor 1.5 second after damaged\nWhen barrier broken, charge barrier\nagain after 10 seconds",
                 this.x, this.y + 80 );
             pop();
 

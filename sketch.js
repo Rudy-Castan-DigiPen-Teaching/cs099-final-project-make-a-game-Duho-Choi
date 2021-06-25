@@ -15,6 +15,7 @@ let mouseWasPressed = false;
 // player & enemies
 let player;
 let player_laser = [];
+let player_missile = [];
 let enemy = [];
 let enemy_laser = [];
 let max_enemy = 3;
@@ -56,6 +57,9 @@ function setup()
 
     // base
     main_base = new base( -500, -500 );
+
+    bgm.play();
+    bgm.setVolume( 0 );
 }
 
 function draw()
@@ -116,7 +120,7 @@ function draw()
         textAlign( LEFT, TOP );
         textSize( 19 );
         image( player_spaceship_img, width / 8.5, height / 4, 110, 110 );
-        text( "◁ This is your spaceship. You are now running \nout from cruel space empire. You have to\nsurvive from empire's spacecrafts' chase!",
+        text( "◁ This is your spaceship. You are now running \nout from cruel space empire. You have to\nsurvive from empire's spaceships' chase!",
             width / 5.8, height / 5 );
         image( keyboard_img, width * 1.85 / 3, height / 4, 220 );
         text( "You can control your spaceship with keyboard", width * 2.35 / 4, height / 5 );
@@ -255,7 +259,9 @@ function draw()
 
             // player hit by laser
             if ( player.hp > 0 )
+            {
                 player.hitByLaser( lasers );
+            }
         }
 
         // if player laser collide with object, delete laser
@@ -297,6 +303,10 @@ function draw()
         // upgrade player stat
         upgrade();
 
+        // don't make player hp more than max hp
+        if ( player.hp > player.max_hp )
+            player.hp = player.max_hp;
+
         // update player & interface
         player.update();
         player.draw_interface();
@@ -333,11 +343,27 @@ function draw()
         if ( levelup_button1.clicked() )
         {
             player_upgrade[ player_upgrade.length ] = upgrade1;
+            if ( upgrade1 == 2 )
+            {
+                barrier_deploy();
+            }
+            else if ( upgrade1 == 7 )
+            {
+                player.hp += player.max_hp / 2
+            }
             current_screen = game_screen;
         }
         else if ( levelup_button2.clicked() )
         {
             player_upgrade[ player_upgrade.length ] = upgrade2;
+            if ( upgrade2 == 2 )
+            {
+                barrier_deploy();
+            }
+            else if ( upgrade1 == 7 )
+            {
+                player.hp += player.max_hp / 2
+            }
             current_screen = game_screen;
         }
         break;
@@ -433,12 +459,28 @@ function draw()
 
 }
 
-let fired = false;
-
 // player shooting laser
 function player_blastLaser()
 {
-    player_laser.push( new laser( player, player.fireDmg ) );
+    if ( player_upgrade.includes( 1 ) )
+    {
+        player_laser.push( new laser( player, player.fireDmg ) );
+        player_laser.push( new laser( player, player.fireDmg ) );
+
+        for ( let i = 0; i < player_laser.length; i++ )
+        {
+            if ( i % 2 == 0 )
+            {
+                player_laser[ i ].position.x += 10;
+            }
+            else if ( i % 2 == 1 )
+            {
+                player_laser[ i ].position.y -= 20;
+            }
+        }
+    }
+    else
+        player_laser.push( new laser( player, player.fireDmg ) );
 }
 
 // enemies shooting laser
@@ -467,18 +509,19 @@ function enemy_attack()
 // press space bar = shoot laser 
 function keyPressed()
 {
-    let fireRate = 1000 / player.fireRate;
+    let fired = false;
+    let fireDelay = 1000 / player.fireRate;
     if ( keyCode == 32 && current_screen == game_screen )
     {
         if ( fired == false )
         {
             fired = true;
             setTimeout( player_blastLaser, 0 );
-            blast_interval = setInterval( player_blastLaser, fireRate );
+            blast_interval = setInterval( player_blastLaser, fireDelay );
             setTimeout( function ()
             {
                 fired = false
-            }, fireRate );
+            }, fireDelay );
         }
     }
 }
@@ -492,9 +535,30 @@ function keyReleased()
     }
 }
 
+// if mouse left button pressed, shoot missile
 function mousePressed()
 {
+    let fired = false;
+    let fireRate = 1000;
 
+    if ( mouseButton === LEFT )
+    {
+        if ( player_upgrade.includes( 3 ) && current_screen == game_screen )
+        {
+            if ( fired == false )
+            {
+                fired = true;
+                setTimeout( function ()
+                {
+                    player_laser.push( new missile( player, player.fireDmg ) );
+                }, 0 );
+                setTimeout( function ()
+                {
+                    fired = false
+                }, fireRate );
+            }
+        }
+    }
 }
 
 function mouseReleased()
@@ -517,11 +581,13 @@ function enter_shop()
 function upgrade()
 {
     player.max_hp = 100 + 150 * hp_level;
+
     // upgrade 7
     if ( player_upgrade.includes( 7 ) )
         player.max_hp *= 2;
 
     player.fireDmg = 30 + 25 * dmg_level;
+
     // upgrade 5
     if ( player_upgrade.includes( 5 ) && current_screen == game_screen )
     {
@@ -532,12 +598,18 @@ function upgrade()
             player.fireDmg = 30 + 25 * dmg_level;
     }
     player.fireRate = 4 + 0.6 * fire_rate_level;
+
     // upgrade 6
     player.speed_max = 5 + 1 * spd_level;
     if ( player_upgrade.includes( 6 ) )
         player.speed_max -= 3;
-    player.armor = 5 * armor_level;
-    if ( player_upgrade.includes( 6 ) )
+
+    // upgrade 2
+    if ( player_upgrade.includes( 2 ) && barrier_on == true && current_screen == game_screen )
+        player.armor = 100
+    else
+        player.armor = 5 * armor_level;
+    if ( player_upgrade.includes( 6 ) && barrier_on == false )
         player.armor += 20;
 }
 
@@ -552,10 +624,6 @@ function level_up()
 {
     // heal player hp
     player.hp += player.max_hp / 5;
-    if ( player.hp > player.max_hp )
-    {
-        player.hp = player.max_hp
-    }
 
     player.level += 1;
     player.exp = 0;
@@ -598,8 +666,6 @@ function spawn_enemy()
 
     if ( enemy.length < max_enemy )
         enemy.push( new spaceship( position_x, position_y, 30, 1 ) );
-
-
 }
 
 // enemies heading to player
