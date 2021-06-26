@@ -19,7 +19,7 @@ let shop_button = [];
 class button
 {
     // type 0 = normal button
-    // type 1~10 = upgrade button
+    // type 1~8 = upgrade button
     constructor( x_pos, y_pos, width, height, typ = 0 )
     {
         this.x = x_pos;
@@ -107,7 +107,7 @@ class button
             textSize( 45 );
             text( "Barrier", this.x, this.y - 30 );
             textSize( 22 );
-            text( "Protect player from attack \nfor 2 seconds after damaged\nWhen barrier broken, charge barrier\nagain after 10 seconds",
+            text( "Protect player from attack \nfor 2 seconds after damaged\nWhen barrier broken,\ncharge barrier again\nafter 10 seconds",
                 this.x, this.y + 80 );
             pop();
 
@@ -143,10 +143,10 @@ class button
             image( upgrade_img[ 2 ], this.x, this.y - 160, 200, 200 );
             textAlign( CENTER, TOP );
             textSize( 50 );
-            text( "Laser EMP", this.x, this.y - 30 );
+            text( "Shock Wave", this.x, this.y - 30 );
             textSize( 22 );
-            text( "When mouse middle button\nclicked, use shock wave\nDamages all of enemies nearby\n(Cooldown : 20 sec)",
-                this.x, this.y + 100 );
+            text( "When mouse middle button\nclicked, use shock wave\nDamages all nearby enemies\nShock wave has 3X Damage\nof your laser\n(Cooldown : 20 sec)",
+                this.x, this.y + 65 );
             pop();
 
             break;
@@ -233,7 +233,7 @@ class button
         const mouseInButton = ( mouseX > this.x - this.width / 2 && mouseX < this.x + this.width / 2 ) && ( mouseY >
             this.y - this.height / 2 && mouseY < this.y + this.height / 2 );
 
-        if ( mouseIsPressed && mouseInButton && mouseWasPressed == false )
+        if ( mouseIsPressed && mouseInButton && mouseWasPressed == false && mouseButton == LEFT )
         {
             mouseWasPressed = true;
             return true;

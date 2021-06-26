@@ -4,7 +4,7 @@
 // Spring 2021
 
 // current screen
-let current_screen = 0;
+let current_screen = 12;
 
 // camera
 let player_camera;
@@ -62,7 +62,8 @@ function setup()
     main_base = new base( -500, -500 );
 
     bgm.play();
-    bgm.setVolume( 0 );
+    bgm.setVolume( 0.1 );
+    laser_sound.setVolume( 0.1 );
 }
 
 function draw()
@@ -181,9 +182,14 @@ function draw()
         noStroke();
         fill( 0, 200 );
         rect( width / 2, height / 2 + 30, width * 9 / 10, height * 4 / 5, 50 );
-        pop();
 
-        push();
+        // texts
+        textAlign( LEFT, TOP );
+        fill( 255 );
+        textSize( 35 );
+        text( "Director : Duho Choi\nLead Programmer : Duho Choi\nAnd everything else except assets : Duho Choi\n\nDesigneers :\nImages by : Rawdanitsu, kotnaszynce, Kenney, Rallix,\nMillionthVector, Prinsu-Kun\nSounds by : celestialghost8, dklon\n(Assets brought from opengameart.org)\n\nSpecial thanks to : Our professor Rudy Castan, and all of\nour classmates and friends",
+            width / 9, height / 5 );
+        pop();
 
         break;
 
@@ -231,6 +237,11 @@ function draw()
             else if ( enemy[ i ].hp <= 0 )
             {
                 enemy[ i ].reward( player );
+                enemy[ i ].shooting_laser = true;
+                if ( i > 0 )
+                {
+                    enemy[ i - 1 ].shooting_laser = enemy[ i ].shooting_laser;
+                }
                 enemy.splice( i, 1 );
             }
         }
@@ -306,7 +317,7 @@ function draw()
         // upgrade 8, update & draw guard
         if ( player_upgrade.includes( 8 ) )
         {
-            player_guard.update(player);
+            player_guard.update( player );
         }
 
         // stop camera
@@ -372,7 +383,7 @@ function draw()
             {
                 barrier_deploy();
             }
-            else if ( upgrade1 == 7 )
+            else if ( upgrade2 == 7 )
             {
                 player.hp += player.max_hp;
             }
@@ -470,234 +481,4 @@ function draw()
         }
     }
 
-}
-
-// player shooting laser
-function player_blastLaser()
-{
-    if ( player_upgrade.includes( 1 ) )
-    {
-        player_laser.push( new laser( player, player.fireDmg ) );
-        player_laser.push( new laser( player, player.fireDmg ) );
-
-        for ( let i = 0; i < player_laser.length; i++ )
-        {
-            if ( i % 2 == 0 )
-            {
-                player_laser[ i ].position.x += 10;
-            }
-            else if ( i % 2 == 1 )
-            {
-                player_laser[ i ].position.y -= 20;
-            }
-        }
-    }
-    else
-        player_laser.push( new laser( player, player.fireDmg ) );
-}
-
-// enemies shooting laser
-function enemy_blastLaser( i )
-{
-    enemy_laser.push( new laser( enemy[ i ], enemy[ i ].fireDmg ) );
-}
-
-function enemy_attack()
-{
-    let enemy_fire = random( 3000, 4000 );
-    for ( let i = 0; i < enemy.length; i++ )
-    {
-        if ( enemy[ i ].shooting_laser == false )
-        {
-            setTimeout( enemy_blastLaser( i ), 0 );
-            enemy[ i ].shooting_laser = true;
-            setTimeout( function ()
-            {
-                enemy[ i ].shooting_laser = false
-            }, enemy_fire );
-        }
-    }
-}
-
-// press space bar = shoot laser 
-let fired = false;
-
-function keyPressed()
-{
-    let fireDelay = 1000 / player.fireRate;
-    if ( keyCode == 32 && current_screen == game_screen )
-    {
-        if ( fired == false )
-        {
-            fired = true;
-            setTimeout( player_blastLaser, 0 );
-            blast_interval = setInterval( player_blastLaser, fireDelay );
-            setTimeout( function ()
-            {
-                fired = false
-            }, fireDelay );
-        }
-    }
-}
-
-// release space bar = stop shooting laser
-function keyReleased()
-{
-    if ( keyCode == 32 )
-    {
-        clearInterval( blast_interval );
-    }
-}
-
-// if mouse left button pressed, shoot missile
-let missile_fired = false;
-
-function mousePressed()
-{
-    let fireRate = 1000;
-
-    if ( mouseButton === LEFT )
-    {
-        if ( player_upgrade.includes( 3 ) && current_screen == game_screen )
-        {
-            if ( missile_fired == false )
-            {
-                setTimeout( function ()
-                {
-                    player_laser.push( new missile( player, player.fireDmg ) );
-                    missile_fired = true;
-                }, 0 );
-                setTimeout( function ()
-                {
-                    missile_fired = false
-                }, fireRate );
-            }
-        }
-    }
-}
-
-function mouseReleased()
-{
-    mouseWasPressed = false;
-}
-
-// entering shop
-function enter_shop()
-{
-    current_screen = shop_screen;
-    player.position.x = main_base.x + main_base.width * 2;
-    player.position.y = main_base.y;
-    player.velocity.setLength( 0 );
-    player.velocity.setAngle( 0 );
-    player.acceleration.setLength( 0 );
-}
-
-// upgrade player
-function upgrade()
-{
-    player.max_hp = 100 + 150 * hp_level;
-
-    // upgrade 7
-    if ( player_upgrade.includes( 7 ) )
-        player.max_hp *= 2;
-
-    player.fireDmg = 30 + 25 * dmg_level;
-
-    // upgrade 5
-    if ( player_upgrade.includes( 5 ) && current_screen == game_screen )
-    {
-        let crit = random( 10 );
-        if ( crit >= 7 )
-            player.fireDmg *= 2;
-        else
-            player.fireDmg = 30 + 25 * dmg_level;
-    }
-    player.fireRate = 3 + 0.7 * fire_rate_level;
-
-    // upgrade 6
-    player.speed_max = 5 + 1 * spd_level;
-    if ( player_upgrade.includes( 6 ) )
-        player.speed_max -= 3;
-
-    // upgrade 2
-    if ( player_upgrade.includes( 2 ) && barrier_on == true && current_screen == game_screen )
-        player.armor = 100
-    else
-        player.armor = 5 * armor_level;
-    if ( player_upgrade.includes( 6 ) && barrier_on == false )
-        player.armor += 20;
-}
-
-// upgrade enemies
-function enemy_upgrade()
-{
-
-}
-
-// level up
-function level_up()
-{
-    // heal player hp
-    player.hp += player.max_hp / 5;
-
-    player.level += 1;
-    player.exp = 0;
-    player.max_exp += 30;
-    player.acceleration.setLength( 0 );
-
-    // upgrade player evert 3 levels
-    if ( player.level % 3 == 0 && 0 in upgrade_list )
-    {
-        // set two upgrade options
-        let levelup_1 = int( random( 1, upgrade_list.length - 0.01 ) );
-        upgrade1 = upgrade_list[ levelup_1 ];
-        levelup_button1.type = upgrade1;
-        upgrade_list.splice( levelup_1, 1 );
-
-        let levelup_2 = int( random( 1, upgrade_list.length - 0.01 ) );
-        upgrade2 = upgrade_list[ levelup_2 ];
-        levelup_button2.type = upgrade2;
-        upgrade_list.splice( levelup_2, 1 );
-
-        max_enemy++;
-        current_screen = level_up_screen;
-    }
-}
-
-// spawn enemy 2000 lengths away from player
-function spawn_enemy()
-{
-    IsEnemySpawning = true;
-
-    let position_x = int( random( player.position.x + 2000, player.position.x - 2000 ) );
-    let y_random = random( 0, 10 );
-    let y_pos;
-    if ( y_random > 5 )
-        y_pos = 1;
-    else
-        y_pos = -1;
-
-    let position_y = int( y_pos * sqrt( 2000 * 2000 - position_x * position_x ) );
-
-    if ( enemy.length < max_enemy )
-        enemy.push( new spaceship( position_x, position_y, 30, 1 ) );
-}
-
-// enemies heading to player
-function head_to_player()
-{
-    for ( let i = 0; i < enemy.length; i++ )
-    {
-        let direction = atan2( player.position.y - enemy[ i ].position.y, player.position.x - enemy[ i ].position.x );
-        enemy[ i ].velocity.setAngle( direction );
-
-        // if enemy is too close to player, slow down
-        let dist = sqrt( ( player.position.x - enemy[ i ].position.x ) * ( player.position.x - enemy[ i ].position.x ) +
-            ( player.position.y - enemy[ i ].position.y ) * ( player.position.y - enemy[ i ].position.y ) );
-
-        if ( dist > 350 )
-            enemy[ i ].velocity.setLength( enemy[ i ].speed_max );
-        else
-            enemy[ i ].velocity.setLength( 0.3 );
-    }
 }

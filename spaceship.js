@@ -17,7 +17,7 @@ let upgrade2;
 
 let barrier_on = false;
 
-let player_upgrade = [];
+let player_upgrade = [4,8];
 
 class spaceship
 {
@@ -39,13 +39,12 @@ class spaceship
         this.hp = 50;
         this.max_hp = 50;
 
-        this.fireDmg = 5;
+        this.fireDmg = 3;
         this.fireRate = 2;
 
         this.shooting_laser = false;
 
         this.armor = 0;
-        this.barrier = 0;
 
         this.speed_max = 5;
         this.angleOffset = 0.1;
@@ -200,7 +199,7 @@ class spaceship
         fill( 0 );
         textAlign( CENTER, CENTER );
         textSize( 30 );
-        text( this.hp + " / " + this.max_hp, width / 4.5, height * 17.5 / 20 );
+        text( int(this.hp) + " / " + this.max_hp, width / 4.5, height * 17.5 / 20 );
         pop();
 
         // coordinate
@@ -208,6 +207,10 @@ class spaceship
         textAlign( LEFT, CENTER );
         textSize( 20 );
         text( "X : " + int( this.position.x ) + "  Y : " + int( this.position.y ), width * 4 / 5, 20 );
+
+        // missile delay
+
+        // shockwave delay
 
         pop();
     }
