@@ -4,7 +4,7 @@
 // Spring 2021
 
 // current screen
-let current_screen = 12;
+let current_screen = 0;
 
 // camera
 let player_camera;
@@ -480,5 +480,4 @@ function draw()
             current_screen = game_screen;
         }
     }
-
 }

@@ -45,7 +45,7 @@ function enemy_attack()
         if ( enemy[ i ].shooting_laser == false )
         {
             enemy[ i ].shooting_laser = true;
-            setTimeout( enemy_blastLaser( i ), 0 );
+            enemy_blastLaser(i);
             setTimeout( function ()
             {
                 enemy[ i ].shooting_laser = false;
@@ -54,47 +54,16 @@ function enemy_attack()
     }
 }
 
-// press space bar = shoot laser 
-let fired = false;
-
-function keyPressed()
-{
-    let fireDelay = 1000 / player.fireRate;
-    if ( keyCode == 32 && current_screen == game_screen )
-    {
-        if ( fired == false )
-        {
-            fired = true;
-            setTimeout( player_blastLaser, 0 );
-            blast_interval = setInterval( player_blastLaser, fireDelay );
-            setTimeout( function ()
-            {
-                fired = false
-            }, fireDelay );
-        }
-    }
-}
-
-// release space bar = stop shooting laser
-function keyReleased()
-{
-    if ( keyCode == 32 )
-    {
-        clearInterval( blast_interval );
-    }
-}
-
 // upgrade 3 : if mouse left button pressed, shoot missile
 // upgrade 4 : if mouse middle button pressed, shock wave
 let missile_fired = false;
 let shockwave_used = false;
 
-function mousePressed()
+function keyPressed()
 {
     let fireRate = 1000;
-    let shockwave_delay = 20000;
-
-    if ( mouseButton === LEFT )
+    
+    if ( keyCode == 32 )
     {
         if ( player_upgrade.includes( 3 ) && current_screen == game_screen )
         {
@@ -110,6 +79,35 @@ function mousePressed()
                     missile_fired = false
                 }, fireRate );
             }
+        }
+    }
+}
+
+function keyReleased()
+{
+    
+}
+
+
+// if mouse left button pressed, shoot laser
+let fired = false;
+
+function mousePressed()
+{
+    let fireDelay = 1000 / player.fireRate;
+    let shockwave_delay = 20000;
+
+    if ( mouseButton === LEFT && current_screen == game_screen )
+    {
+        if ( fired == false )
+        {
+            fired = true;
+            setTimeout( player_blastLaser, 0 );
+            blast_interval = setInterval( player_blastLaser, fireDelay );
+            setTimeout( function ()
+            {
+                fired = false
+            }, fireDelay );
         }
     }
 
@@ -133,9 +131,14 @@ function mousePressed()
     }
 }
 
+// release mouse left = stop shooting laser
 function mouseReleased()
 {
     mouseWasPressed = false;
+    if ( mouseButton === LEFT || mouseButton === RIGHT )
+    {
+        clearInterval( blast_interval );
+    }
 }
 
 // upgrade 4 : Shock Wave

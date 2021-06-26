@@ -18,6 +18,7 @@ let game_background_img;
 // sounds
 let bgm;
 let laser_sound;
+let levelup_sound;
 
 function preload()
 {
@@ -42,5 +43,5 @@ function preload()
 
     // sound
     bgm = loadSound( 'assets/bgm.mp3' );
-    laser_sound = loadSound('assets/laser4.wav');
+    laser_sound = loadSound( 'assets/laser4.wav' );
 }

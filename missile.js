@@ -11,14 +11,31 @@ class missile
         this.velocity = new Vec2( shooter.velocity.x, shooter.velocity.y );
         this.accel = new Vec2( 0.7, 0 );
         this.team = shooter.team;
-        this.dir = atan2( mouseY - 450, mouseX - 600 );
         this.dmg = damage * 2.5;
         this.collide = false;
     }
 
     update()
     {
-        this.velocity.setAngle( this.dir );
+        let closest_enemy;
+        let min_distance;
+        for ( let i = 0; i < enemy.length; i++ )
+        {
+            let distance = sqrt( ( enemy[ i ].position.x - player.position.x ) * ( enemy[ i ].position.x - player
+                .position.x ) - ( enemy[ i ].position.y - player.position.y ) * ( enemy[ i ].position.y -
+                player.position.y ) );
+            if ( i == 0 )
+                min_distance = distance;
+            if ( min_distance > distance )
+            {
+                min_distance = distance;
+                closest_enemy = i;
+            }
+        }
+
+        let dir = atan2( enemy[ closest_enemy ].position.y - player.position.y, enemy[ closest_enemy ].position.x -
+            player.position.x );
+        this.velocity.setAngle( dir );
         this.velocity.setLength( this.accel.getLength() + this.velocity.getLength() );
         this.position.addTo( this.velocity );
 
