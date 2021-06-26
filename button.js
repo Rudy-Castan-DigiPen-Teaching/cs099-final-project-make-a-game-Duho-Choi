@@ -126,13 +126,13 @@ class button
             textSize( 45 );
             text( "Missile Turret", this.x, this.y - 30 );
             textSize( 22 );
-            text( "Shooting missile when\nmouse left button is pressed\nMissile has 1.5X damage of\nyour laser damage",
+            text( "Shooting missile when\nmouse left button is pressed\nMissile has 2X damage of\nyour laser damage\n(Cooldown : 1 second)",
                 this.x, this.y + 90 );
             pop();
 
             break;
 
-            // upgrade 4 : Laser EMP
+            // upgrade 4 : Shock Wave
         case 4:
             this.draw_button();
 

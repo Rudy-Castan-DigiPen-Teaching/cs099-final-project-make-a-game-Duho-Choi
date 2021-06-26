@@ -8,7 +8,7 @@ let spd_level = 0;
 let dmg_level = 0;
 let fire_rate_level = 0;
 let hp_level = 0;
-let armor_level = 20;
+let armor_level = 0;
 
 // level up gadget
 let upgrade_list = [ 1, 2, 3, 4, 5, 6, 7, 8 ];
@@ -17,7 +17,7 @@ let upgrade2;
 
 let barrier_on = false;
 
-let player_upgrade = [ 3 ];
+let player_upgrade = [];
 
 class spaceship
 {
@@ -40,7 +40,7 @@ class spaceship
         this.max_hp = 50;
 
         this.fireDmg = 5;
-        this.fireRate = 4;
+        this.fireRate = 2;
 
         this.shooting_laser = false;
 
@@ -212,7 +212,7 @@ class spaceship
         pop();
     }
 
-    hitByLaser( laser )
+    IsHitByLaser( laser )
     {
         const distance = sqrt( ( this.position.x - laser.position.x ) * ( this.position.x - laser.position.x ) + (
             this.position.y - laser.position.y ) * ( this.position.y - laser.position.y ) );

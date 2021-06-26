@@ -190,8 +190,6 @@ function draw()
         // if player.hp < 0, game over
         if ( player.hp <= 0 )
         {
-            current_screen = game_over_screen;
-            break;
         }
 
         player_camera.x = player.position.x - width / 2;
@@ -248,7 +246,7 @@ function draw()
             for ( let i = 0; i < enemy.length; i++ )
             {
                 if ( enemy[ i ].hp > 0 )
-                    enemy[ i ].hitByLaser( lasers );
+                    enemy[ i ].IsHitByLaser( lasers );
             }
         }
 
@@ -260,7 +258,7 @@ function draw()
             // player hit by laser
             if ( player.hp > 0 )
             {
-                player.hitByLaser( lasers );
+                player.IsHitByLaser( lasers );
             }
         }
 
@@ -349,7 +347,7 @@ function draw()
             }
             else if ( upgrade1 == 7 )
             {
-                player.hp += player.max_hp / 2
+                player.hp += player.max_hp;
             }
             current_screen = game_screen;
         }
@@ -362,7 +360,7 @@ function draw()
             }
             else if ( upgrade1 == 7 )
             {
-                player.hp += player.max_hp / 2
+                player.hp += player.max_hp;
             }
             current_screen = game_screen;
         }
@@ -385,6 +383,7 @@ function draw()
                     {
                         player.coin -= ( 20 + 40 * hp_level );
                         hp_level++;
+                        player.hp += 150;
                     }
                     break;
                 case 1:
@@ -491,6 +490,7 @@ function enemy_blastLaser( i )
 
 function enemy_attack()
 {
+    let enemy_fire = random( 3000, 4000 );
     for ( let i = 0; i < enemy.length; i++ )
     {
         if ( enemy[ i ].shooting_laser == false )
@@ -507,9 +507,9 @@ function enemy_attack()
 }
 
 // press space bar = shoot laser 
+let fired = false;
 function keyPressed()
 {
-    let fired = false;
     let fireDelay = 1000 / player.fireRate;
     if ( keyCode == 32 && current_screen == game_screen )
     {
@@ -536,25 +536,25 @@ function keyReleased()
 }
 
 // if mouse left button pressed, shoot missile
+let missile_fired = false;
 function mousePressed()
 {
-    let fired = false;
     let fireRate = 1000;
 
     if ( mouseButton === LEFT )
     {
         if ( player_upgrade.includes( 3 ) && current_screen == game_screen )
         {
-            if ( fired == false )
+            if ( missile_fired == false )
             {
-                fired = true;
                 setTimeout( function ()
                 {
                     player_laser.push( new missile( player, player.fireDmg ) );
+                    missile_fired = true;
                 }, 0 );
                 setTimeout( function ()
                 {
-                    fired = false
+                    missile_fired = false
                 }, fireRate );
             }
         }
@@ -597,7 +597,7 @@ function upgrade()
         else
             player.fireDmg = 30 + 25 * dmg_level;
     }
-    player.fireRate = 4 + 0.6 * fire_rate_level;
+    player.fireRate = 3 + 0.7 * fire_rate_level;
 
     // upgrade 6
     player.speed_max = 5 + 1 * spd_level;
@@ -649,7 +649,7 @@ function level_up()
     }
 }
 
-// spawn enemy 1200 lengths away from player
+// spawn enemy 2000 lengths away from player
 function spawn_enemy()
 {
     IsEnemySpawning = true;
