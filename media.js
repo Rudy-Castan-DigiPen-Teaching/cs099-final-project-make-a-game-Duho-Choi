@@ -27,7 +27,7 @@ function preload()
     base_img = loadImage( 'assets/station.png' );
     coin_img = loadImage( 'assets/coin.png' );
     boost_img = loadImage( 'assets/boost_flame.png' );
-    enemy_boost_img = loadImage('assets/enemy_boost_flame.png');
+    enemy_boost_img = loadImage( 'assets/enemy_boost_flame.png' );
     upgrade_img[ 0 ] = loadImage( 'assets/DoubleShot.png' );
     upgrade_img[ 1 ] = loadImage( 'assets/Barrier.png' );
     upgrade_img[ 2 ] = loadImage( 'assets/playerMissile.png' );

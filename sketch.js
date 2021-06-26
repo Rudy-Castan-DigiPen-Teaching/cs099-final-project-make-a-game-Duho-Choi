@@ -16,6 +16,7 @@ let mouseWasPressed = false;
 let player;
 let player_laser = [];
 let player_missile = [];
+let player_guard;
 let enemy = [];
 let enemy_laser = [];
 let max_enemy = 3;
@@ -54,6 +55,8 @@ function setup()
     // player
     player = new spaceship( 0, 0, 30, 1, 0 );
     player.hp = 100;
+
+    player_guard = new guard( player );
 
     // base
     main_base = new base( -500, -500 );
@@ -190,6 +193,7 @@ function draw()
         // if player.hp < 0, game over
         if ( player.hp <= 0 )
         {
+            //current_screen = game_over_screen;
         }
 
         player_camera.x = player.position.x - width / 2;
@@ -259,6 +263,10 @@ function draw()
             if ( player.hp > 0 )
             {
                 player.IsHitByLaser( lasers );
+
+                // upgrade 8 guard hit by laser
+                if ( player_upgrade.includes( 8 ) )
+                    player_guard.IsHitByLaser( lasers );
             }
         }
 
@@ -294,6 +302,12 @@ function draw()
 
         // draw player
         player.draw();
+
+        // upgrade 8, update & draw guard
+        if ( player_upgrade.includes( 8 ) )
+        {
+            player_guard.update(player);
+        }
 
         // stop camera
         player_camera.stopDraw();
@@ -495,8 +509,7 @@ function enemy_attack()
     {
         if ( enemy[ i ].shooting_laser == false )
         {
-            let enemy_fire = random( 3000, 4000 );
-            setTimeout( enemy_blastLaser( i ), enemy_fire );
+            setTimeout( enemy_blastLaser( i ), 0 );
             enemy[ i ].shooting_laser = true;
             setTimeout( function ()
             {
@@ -508,6 +521,7 @@ function enemy_attack()
 
 // press space bar = shoot laser 
 let fired = false;
+
 function keyPressed()
 {
     let fireDelay = 1000 / player.fireRate;
@@ -537,6 +551,7 @@ function keyReleased()
 
 // if mouse left button pressed, shoot missile
 let missile_fired = false;
+
 function mousePressed()
 {
     let fireRate = 1000;

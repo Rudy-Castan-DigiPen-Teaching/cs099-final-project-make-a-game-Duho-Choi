@@ -17,7 +17,7 @@ let upgrade2;
 
 let barrier_on = false;
 
-let player_upgrade = [];
+let player_upgrade = [8];
 
 class spaceship
 {
@@ -223,7 +223,7 @@ class spaceship
             laser.collide = true;
             if(this.team == 0 && player_upgrade.includes(2) && barrier_on == true)
             {
-                setTimeout(barrier_remove,1500);
+                setTimeout(barrier_remove,2000);
             }
         }
     }
