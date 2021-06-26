@@ -15,6 +15,7 @@ Get it from https://opengameart.org/content/keyboard-keys-1.
 
 
 ### These follows CC0 license.
+https://creativecommons.org/publicdomain/zero/1.0/
 
 #### CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
 This is a human-readable summary of the Legal Code (read the full text). Disclaimer
@@ -36,6 +37,7 @@ boost_flame.png : Edited color, enemy_boos_flame.png is the original version. Ge
 
 
 ### These follows CC-BY 3.0 license.
+https://creativecommons.org/licenses/by/3.0/
 
 #### Attribution 3.0 Unported (CC BY 3.0)
 You are free to:
@@ -57,6 +59,7 @@ Get it from https://opengameart.org/content/cc0-scraps.
 
     
 ### These follows CC0 license.
+https://creativecommons.org/publicdomain/zero/1.0/
 
 #### CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
 This is a human-readable summary of the Legal Code (read the full text). Disclaimer
@@ -65,3 +68,19 @@ The person who associated a work with this deed has dedicated the work to the pu
 
 You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission. See Other Information below.
 
+
+
+## laser4.wav
+Get it from https://opengameart.org/content/laser-fire, made by dklon.
+
+
+### These follows CC-BY 3.0 license.
+https://creativecommons.org/licenses/by/3.0/
+
+#### Attribution 3.0 Unported (CC BY 3.0)
+You are free to:
+Share — copy and redistribute the material in any medium or format
+Adapt — remix, transform, and build upon the material
+for any purpose, even commercially.
+Under the following terms:
+Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
