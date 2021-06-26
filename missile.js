@@ -12,7 +12,7 @@ class missile
         this.accel = new Vec2( 0.7, 0 );
         this.team = shooter.team;
         this.dir = atan2( mouseY - 450, mouseX - 600 );
-        this.dmg = damage * 2;
+        this.dmg = damage * 2.5;
         this.collide = false;
     }
 
