@@ -8,7 +8,7 @@ class guard
     constructor( shooter )
     {
         this.position = new Vec2( shooter.position.x + 90, shooter.position.y );
-        this.velocity = new Vec2( 0, 75 );
+        this.velocity = new Vec2( 0, 90 );
         this.diameter = 20;
     }
 
@@ -32,14 +32,6 @@ class guard
         rotate( this.velocity.getAngle() );
         imageMode( CENTER );
         image( upgrade_img[ 7 ], 0, 0, this.diameter + 15, this.diameter + 5 );
-        pop();
-
-        // hit box
-        push();
-        noFill();
-        strokeWeight( 3 );
-        stroke( "blue" );
-        circle( this.position.x, this.position.y, this.diameter * 2 );
         pop();
     }
 

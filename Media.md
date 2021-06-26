@@ -6,8 +6,9 @@ Added Title in Background-0.jpg, get original version of it and Background-2.jpg
 ## coin.png : 
 Get it from https://opengameart.org/content/coin-2.
 
-## station.png : 
-Get it from https://opengameart.org/content/space-shooter-extension-250.
+## station.png, guard.png, playerMissile.png : 
+guard.png : edit color from original version.
+Get those(including original version of guard.png) from https://opengameart.org/content/space-shooter-extension-250.
 
 ## keyboard_keys.png : 
 Get it from https://opengameart.org/content/keyboard-keys-1.
@@ -44,6 +45,9 @@ for any purpose, even commercially.
 Under the following terms:
 Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
 
+
+## Barrier.png, Critical.png, DoubleShot.png, HeavyArmor.png, HPup.png : 
+These are all drawn by me (Duho Choi) with using Pixel Studio for pixel art.
 
 ---
 # Sounds

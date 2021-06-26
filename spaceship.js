@@ -17,7 +17,7 @@ let upgrade2;
 
 let barrier_on = false;
 
-let player_upgrade = [8];
+let player_upgrade = [];
 
 class spaceship
 {
