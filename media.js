@@ -5,6 +5,7 @@
 
 // images
 let keyboard_img;
+let mouse_img;
 let player_spaceship_img;
 let enemy_spaceship_img;
 let boost_img;
@@ -33,6 +34,7 @@ function preload()
     upgrade_img[ 0 ] = loadImage( 'assets/AtkUp.png' );
     upgrade_img[ 1 ] = loadImage( 'assets/Barrier.png' );
     upgrade_img[ 2 ] = loadImage( 'assets/playerMissile.png' );
+    upgrade_img[ 3 ] = loadImage( 'assets/Shockwave.png' );
     upgrade_img[ 4 ] = loadImage( 'assets/Critical.png' );
     upgrade_img[ 5 ] = loadImage( 'assets/HeavyArmor.png' );
     upgrade_img[ 6 ] = loadImage( 'assets/HPup.png' );

@@ -144,7 +144,7 @@ class base
                 break;
                 // Repair button
             case 5:
-                shop_button[ i ].draw( "Repair      Cost : " + int(( player.max_hp - player.hp ) / 3), 28 );
+                shop_button[ i ].draw( "Repair      Cost : " + int( ( player.max_hp - player.hp ) / 3 ), 28 );
                 break;
             }
         }

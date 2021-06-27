@@ -212,14 +212,14 @@ function upgrade()
 // upgrade enemies
 function enemy_upgrade()
 {
-    for(let i = 0 ; i < enemy.length ; i++)
+    for ( let i = 0; i < enemy.length; i++ )
     {
-        enemy[i].level = 1 + int(player.level / 3);
-        if(i == 0)
-            enemy_level = enemy[i].level;
-        enemy[i].fireDmg = 4 + enemy[i].level * 3;
-        enemy[i].max_hp = 50 + enemy[i].level * 40;
-        enemy[i].speed_max = 3 + enemy[i].level * 1;
+        enemy[ i ].level = 1 + int( player.level / 3 );
+        if ( i == 0 )
+            enemy_level = enemy[ i ].level;
+        enemy[ i ].fireDmg = 4 + enemy[ i ].level * 3;
+        enemy[ i ].max_hp = 50 + enemy[ i ].level * 40;
+        enemy[ i ].speed_max = 3 + enemy[ i ].level * 1;
     }
 }
 

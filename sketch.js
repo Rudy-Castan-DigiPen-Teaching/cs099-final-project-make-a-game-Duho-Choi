@@ -4,7 +4,7 @@
 // Spring 2021
 
 // current screen
-let current_screen = 0;
+let current_screen = 10;
 
 // camera
 let player_camera;
@@ -73,14 +73,14 @@ function draw()
 {
     background( 20 );
     // keep playing bgm
-    if(bgm_playing == false)
-    {  
-        bgm.play();
+    if ( bgm_playing == false )
+    {
+        //bgm.play();
         bgm_playing = true;
-        setInterval(function()
+        setInterval( function ()
         {
             bgm_playing = false;
-        },110000);
+        }, 110000 );
     }
 
     switch ( current_screen )
@@ -139,7 +139,7 @@ function draw()
         image( player_spaceship_img, width / 8.5, height / 4, 110, 110 );
         text( "◁ This is your spaceship. You are now running \nout from cruel space empire. You have to\nsurvive from empire's spaceships' chase!",
             width / 5.8, height / 5 );
-        image( keyboard_img, width * 1.85 / 3, height / 4, 220 );
+        image( keyboard_img, width * 1.9 / 3, height / 4 + 20, 100, 70 );
         text( "You can control your spaceship with keyboard", width * 2.35 / 4, height / 5 );
         text( "W,A and D.\nThrust with W,\nTurn left / right with A / D.",
             width * 2.85 / 4, height / 4.3 );
@@ -219,7 +219,7 @@ function draw()
 
         // update & upgrade enemies
         enemy_upgrade();
-        
+
         for ( let i = 0; i < enemy.length; i++ )
         {
             if ( enemy[ i ].hp > 0 )
@@ -310,14 +310,14 @@ function draw()
         player.draw();
 
         // update 4, when shockwave used, draw shockwave
-        if(keyIsPressed)
+        if ( keyIsPressed )
         {
             if ( player_upgrade.includes( 4 ) && current_screen == game_screen && shockwave_effect == true )
             {
                 push();
                 noStroke();
-                fill(50,200,255,50);
-                circle(player.position.x,player.position.y,1400);
+                fill( 50, 200, 255, 50 );
+                circle( player.position.x, player.position.y, 1400 );
                 pop();
             }
         }
@@ -467,13 +467,13 @@ function draw()
 
         push();
 
-        fill(150);
-        stroke(130,0,0);
-        textSize(100);
-        textAlign(CENTER,TOP);
-        text("Game Over!",width/2,height/3);
-        textSize(60);
-        text("You have caught to the empire\nand sentenced to life in prison.",width/2,height * 2/3);
+        fill( 150 );
+        stroke( 130, 0, 0 );
+        textSize( 100 );
+        textAlign( CENTER, TOP );
+        text( "Game Over!", width / 2, height / 3 );
+        textSize( 60 );
+        text( "You have caught to the empire\nand sentenced to life in prison.", width / 2, height * 2 / 3 );
 
         pop();
     }

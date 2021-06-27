@@ -66,7 +66,7 @@ class spaceship
         {
             this.velocity.setLength( 0.01 );
         }
-        
+
         // moving player
         if ( this.team == 0 && current_screen == game_screen )
         {
@@ -133,13 +133,13 @@ class spaceship
         pop();
 
         // barrier
-        if(this.team == 0 && barrier_on == true)
+        if ( this.team == 0 && barrier_on == true )
         {
             push();
-            stroke(0,155,255,70);
-            strokeWeight(5);
-            fill(0,255,255,50);
-            circle(this.position.x,this.position.y,this.diameter * 2.8);
+            stroke( 0, 155, 255, 70 );
+            strokeWeight( 5 );
+            fill( 0, 255, 255, 50 );
+            circle( this.position.x, this.position.y, this.diameter * 2.8 );
             pop();
         }
     }
@@ -199,7 +199,7 @@ class spaceship
         fill( 0 );
         textAlign( CENTER, CENTER );
         textSize( 30 );
-        text( int(this.hp) + " / " + this.max_hp, width / 4.5, height * 17.5 / 20 );
+        text( int( this.hp ) + " / " + this.max_hp, width / 4.5, height * 17.5 / 20 );
         pop();
 
         // coordinate
@@ -213,16 +213,16 @@ class spaceship
         text("Times survived : " + second(), width * 3 / 5, 20);
         pop();
         */
-        
+
         // aiming point
         push();
         stroke( "#00F3FF" );
         noFill();
-        translate(mouseX,mouseY);
-        circle(0,0,40);
-        circle(0,0,20);
-        line(-20,0,20,0);
-        line(0,20,0,-20);
+        translate( mouseX, mouseY );
+        circle( 0, 0, 40 );
+        circle( 0, 0, 20 );
+        line( -20, 0, 20, 0 );
+        line( 0, 20, 0, -20 );
         pop();
 
     }
@@ -236,9 +236,9 @@ class spaceship
         {
             this.hp -= laser.dmg * ( ( 100 - this.armor ) / 100 );
             laser.collide = true;
-            if(this.team == 0 && player_upgrade.includes(2) && barrier_on == true)
+            if ( this.team == 0 && player_upgrade.includes( 2 ) && barrier_on == true )
             {
-                setTimeout(barrier_remove,2000);
+                setTimeout( barrier_remove, 2000 );
             }
         }
     }
@@ -259,6 +259,6 @@ function barrier_deploy()
 function barrier_remove()
 {
     barrier_on = false;
-    if(barrier_on == false)
-        setTimeout(barrier_deploy,10000);
+    if ( barrier_on == false )
+        setTimeout( barrier_deploy, 10000 );
 }

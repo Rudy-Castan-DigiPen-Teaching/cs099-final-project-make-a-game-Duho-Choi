@@ -22,7 +22,7 @@ class guard
     {
         this.position.x = shooter.position.x + this.velocity.x;
         this.position.y = shooter.position.y + this.velocity.y;
-        this.velocity.setAngle(this.velocity.getAngle() + deltaTime * radians(360/800));
+        this.velocity.setAngle( this.velocity.getAngle() + deltaTime * radians( 360 / 800 ) );
     }
 
     draw()
