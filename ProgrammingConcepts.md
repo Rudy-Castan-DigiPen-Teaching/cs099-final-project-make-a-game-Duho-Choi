@@ -50,7 +50,7 @@ As I said at Shapes, visual is one of the most important part in the game. Where
 
 ## How do we use it?
 ---
-
+We can decide colors when drawing shapes. 
 
 ### Code Snippet
 ---
@@ -73,7 +73,7 @@ Variables are like a storage that keeps value in it. It can various kinds of var
 
 ## Why is it important? 
 ---
-When we learn programming at first, we usually learn variables as the first subject, which means it's one of the most important part of programming. In games, programs, or any softwares that runs in computer or electric devices, runs with their basic information. So in game, almost every informations are made with variables, and something that moves or 
+When we learn programming at first, we usually learn variables as the first subject, which means it's one of the most important part of programming. In games, programs, or any softwares that runs in computer or electric devices, runs with their basic information. So in game, almost every informations are made with variables, and something that moves has various informations like position, velocity, and so on, and all of them are made with variables. Not only objects moves in game, almost all of information in the game are used to made with variables.
 
 ## How do we use it?
 ---
@@ -100,7 +100,7 @@ Conditional statements checks condition (in round bracket) that is right or wron
 
 ## Why is it important? 
 ---
-Almost all of the actings in the game, including basic acts are worked according to the conditions. Starting the game, finishing the game, also
+Almost all of the actings in the game, including basic acts are worked according to the conditions. Situations like starting the game, finishing the game, also normally works with conditional statements. When player interacts to game, game executes written code that appropriate to condition. Like this way, in the game, and not only game but also programs that user can interacts to it, conditional statements are essential to them.
 
 ## How do we use it?
 ---
@@ -109,45 +109,117 @@ Like this way, lots of basic situations could be implemented by conditional stat
 
 ### Code snippet
 ---
-I used conditional statements as 
- 
+I used conditional statements to adjust player's attack speed.
+
+```js
+From functions.js
+
+function mousePressed()
+{
+    if ( mouseButton === LEFT && current_screen == game_screen )
+    {
+        let fireDelay = 1000 / player.fireRate;
+    
+        if ( fired == false )
+        {
+            fired = true;
+            player_blastLaser();
+            blast_interval = setInterval( player_blastLaser, fireDelay );
+            setTimeout( function ()
+            {
+                fired = false;
+            }, fireDelay );
+        }
+    }
+
+    let missileDelay = 1000;
+
+    if ( mouseButton === LEFT && player_upgrade.includes( 3 ) && current_screen == game_screen )
+    {
+        if ( missile_fired == false )
+        {
+            missile_fired = true;
+            player_laser.push( new missile( player, player.fireDmg ) );
+            missile_sound.play();
+
+            missile_interval = setInterval( function ()
+            {
+                if ( current_screen == game_screen )
+                {
+                    player_laser.push( new missile( player, player.fireDmg ) );
+                    missile_sound.play();
+                }
+            }, missileDelay );
+
+            setTimeout( function ()
+            {
+                missile_fired = false
+            }, missileDelay );
+        }
+    }
+}
+```
 
 # 5. Loops
 
 ## What is it?
 ---
-
+Loops execute code in brace repeatedly when certain condition is satisfied. It can process same code repeatedly, and also it can give definitive change to code that it's executing it now. 
 
 ## Why is it important? 
 ---
-It allows to 
+Loops execute same code repeatedly, so loops make code more simply. It allows us to don't write unessential codes repeatedly, and like I said, it can also be used when you have to deal with one work that has constant changes.
 Also, loops are essential to utilize arrays that I will explain, since arrays are usually used as aggregation of similar types of data, we can easily adjust all of contents in the array with using loops.
 
 ## How do we use it?
 ---
-There are 
+If there's code that we have to write a same code various times, we can just use loops and write it concisely. It doesn't matter there's slight changes in that loop. When using with conditional statements, you can use it not only repeating codes that has constant changes, but also can make various changes.
 
 ### Code snippet
 ---
+Usually in this game, I used Loops to utilize arrays. In this code, I used it to utilise player's lasers.
+```js
+from sketch.js
+
+    for ( let lasers of player_laser )
+    {
+        lasers.update();
+
+        // enemy hit by laser
+        for ( let i = 0; i < enemy.length; i++ )
+        {
+            if ( enemy[ i ].hp > 0 )
+                enemy[ i ].IsHitByLaser( lasers );
+        }
+    }
+
+```
+
 # 6. Functions
 ---
 ## What is it?
 ---
-Functions are kinda like aggregation of codes. There are 
+Functions are kinda like aggregation of codes. We can easily use combined codes by just using a function. And it is useful to make 
 
 ## Why is it important? 
 ---
-When we make functions, it can perform same bundle of codes multiple times by just writing one code of function. So we could make function contains code that we would use often, and use them with only typing one function. And it's also good for showing what those codes work for, so using functions well can make code more simple. It makes code more readable, and it makes you don't need to use same code unnecessarily over and over again.
+When we make functions, it can perform same bundle of codes multiple times by just writing one code of function. So we could make function contains code that we would use often, and use them with only typing one function. And it's also good for showing what those codes work for, so using functions well can make code more simple. It makes code more readable, and it makes you don't need to use same code unnecessarily over and over again. Also, making functions can make code more readable, so it makes code more simple and understandable.
 
 ## How do we use it?
 ---
+If we need to 
 
+
+### Code snippet
 ---
+
+
 # 7. Classes
 
 ## What is it?
 ---
-Classes is 
+In Classes, there are 
+
 
 ## Why is it important? 
 ---

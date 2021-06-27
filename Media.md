@@ -13,6 +13,8 @@ Get those(including original version of guard.png) from https://opengameart.org/
 ## keyboard_keys.png : 
 Get it from https://opengameart.org/content/keyboard-keys-1.
 
+## mouse.png :
+Get it from https://opengameart.org/content/arrow-keys-wsad-mouse-icon.
 
 ### These follows CC0 license.
 https://creativecommons.org/publicdomain/zero/1.0/
@@ -48,8 +50,8 @@ Under the following terms:
 Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
 
 
-## Barrier.png, Critical.png, AtkUp.png, HeavyArmor.png, HPup.png : 
-These are all drawn by me (Duho Choi) with using Pixel Studio for pixel art.
+## Barrier.png, Critical.png, AtkUp.png, Shockwave.png, HeavyArmor.png, UI.png, HPup.png : 
+These are all drawn by me (Duho Choi) with using Pixel Studio for pixel art, and UI.png with capture in my game.
 
 ---
 # Sounds

@@ -1,5 +1,4 @@
 
-
 # CS099 Final Project - Make a Game
 
 Using your programming knowledge and p5.js, you are to make your own game.
@@ -80,12 +79,12 @@ For example, if a student had the login name fun.frank then the appropriate file
 
 ## Grading Rubric
 
-- [ ] Zip file has all the required files. **NOTE:** If we can't build and run your game then you will receive a **Zero**
-- [ ] The zip file submitted can be extracted and the sketch runs in Chrome with a local web server.
-- [ ] Published the project on GitHub.
-- [ ] Properly documented media files in a `Media.md`.
-- [ ] **All** Source Code has a proper header comment: Name, Project Name, Course Number, Term & Year. 
-- [ ] Properly named zip file.
+- [x] Zip file has all the required files. **NOTE:** If we can't build and run your game then you will receive a **Zero**
+- [x] The zip file submitted can be extracted and the sketch runs in Chrome with a local web server.
+- [x] Published the project on GitHub.
+- [x] Properly documented media files in a `Media.md`.
+- [x] **All** Source Code has a proper header comment: Name, Project Name, Course Number, Term & Year. 
+- [x] Properly named zip file.
 - [x] Game Design Document
 - [x] [**core**] Programming Concepts document
 - [x] [**core**] Implemented your own game using `p5.js`

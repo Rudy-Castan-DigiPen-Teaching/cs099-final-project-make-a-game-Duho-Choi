@@ -30,9 +30,6 @@ There are three buttons; Start, Options, and Credits. When clicking start button
 ### Help screen
 Help screen simply shows and tells about elements in the game. And it informs how to play this game.
 
-### Options screen
-
-
 ### Credits screen
 In credits screen, I just simply wrote contributors of this game (almost myself, but there's others who helped me to make this game, and I brought almost all of assets in website, so I wrote all of authors of them).
 
@@ -42,7 +39,7 @@ In the game screen, there's three noticeable user interfaces that shows some res
 
 ### Base screen (Shop screen)
 ![game_screen_mockup](mockups/shop_screen&level_up_screen_mockup.jpg)
-In shop screen, you can upgrade your ship and repair your ship. When you kill enemies, you can get some coins. And with spending your coins, you can upgrade your upgrade
+In shop screen, you can upgrade your ship and repair your ship. When you kill enemies, you can get some coins. And with spending your coins, you can upgrade your basic stats. There's 5 things : Damage, Fire rate, Armor, Hp, and Speed. Also, you can repair your ship. Repairing your speed costs more when your ship severely damaged.
 
 ### Level Up screen
 When player kills enemy and gain exp, player can level up when player get exp more than max exp. When level up, player get free HP heal for reward, and every time player gets level up three times, player could choose special skills(since I couldn't prepare that much upgrades, not every time, and only four times player could choose special skills). There are total 8 upgrades, and when moving to level up screen, game randomly prepare two options of special skills. When player choose one, player gets that special skill, and player couldn't use other skill until the game over and restarts.
