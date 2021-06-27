@@ -17,7 +17,7 @@ let upgrade2;
 
 let barrier_on = false;
 
-let player_upgrade = [];
+let player_upgrade = [4];
 
 class spaceship
 {
@@ -34,7 +34,7 @@ class spaceship
         this.level = lev;
         this.exp = 0;
         this.max_exp = 30;
-        this.coin = 200000000;
+        this.coin = 100000;
 
         this.hp = 50;
         this.max_hp = 50;
@@ -207,12 +207,23 @@ class spaceship
         textAlign( LEFT, CENTER );
         textSize( 20 );
         text( "X : " + int( this.position.x ) + "  Y : " + int( this.position.y ), width * 4 / 5, 20 );
+        pop();
+        
+        // aiming point
+
+        push();
+        stroke( "#00F3FF" );
+        noFill();
+        translate(mouseX,mouseY);
+        circle(0,0,40);
+        circle(0,0,20);
+        line(-20,0,20,0);
+        line(0,20,0,-20);
+        pop();
 
         // missile delay
 
         // shockwave delay
-
-        pop();
     }
 
     IsHitByLaser( laser )

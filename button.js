@@ -76,7 +76,7 @@ class button
             break;
 
             // upgrade 1 ~ 8
-            // upgrade 1 : Double Shot
+            // upgrade 1 : Damage Up
         case 1:
             this.draw_button();
 
@@ -87,9 +87,9 @@ class button
             image( upgrade_img[ 0 ], this.x - 10, this.y - 160, 200, 200 );
             textAlign( CENTER, TOP );
             textSize( 45 );
-            text( "Double Shot", this.x, this.y - 30 );
+            text( "Damage Up", this.x, this.y - 30 );
             textSize( 22 );
-            text( "Shoot two lasers at once\nTwo lasers will move in\n parallel.", this.x, this.y + 100 );
+            text( "Damage upgrades to 1.3X\nof your attack damage.", this.x, this.y + 100 );
             pop();
 
             break;
@@ -126,7 +126,7 @@ class button
             textSize( 45 );
             text( "Missile Turret", this.x, this.y - 30 );
             textSize( 22 );
-            text( "Shooting missile when\nmouse left button is pressed\nMissile has 2.5X damage\nof your laser damage\n(Cooldown : 1 second)",
+            text( "Shooting missile when\nspace key button is pressed\nMissile has 2.5X damage\nof your laser damage\n(Cooldown : 1 second)",
                 this.x, this.y + 90 );
             pop();
 
@@ -145,8 +145,8 @@ class button
             textSize( 50 );
             text( "Shock Wave", this.x, this.y - 30 );
             textSize( 22 );
-            text( "When mouse middle button\nclicked, use shock wave\nDamages all nearby enemies\nShock wave has 3X Damage\nof your laser\n(Cooldown : 20 sec)",
-                this.x, this.y + 65 );
+            text( "When mouse middle button\nclicked, use shock wave\nDamages all nearby enemies\nand deletes all nearby\nenemy lasers\nShock wave has 3X Damage\nof your laser\n(Cooldown : 20 sec)",
+                this.x, this.y + 55 );
             pop();
 
             break;

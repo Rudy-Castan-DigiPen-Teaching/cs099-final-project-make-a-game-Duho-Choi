@@ -15,7 +15,6 @@ let mouseWasPressed = false;
 // player & enemies
 let player;
 let player_laser = [];
-let player_missile = [];
 let player_guard;
 let enemy = [];
 let enemy_laser = [];
@@ -53,13 +52,13 @@ function setup()
     player_camera = new Camera();
 
     // player
-    player = new spaceship( 0, 0, 30, 1, 0 );
+    player = new spaceship( -400, -300, 30, 1, 0 );
     player.hp = 100;
 
     player_guard = new guard( player );
 
     // base
-    main_base = new base( -500, -500 );
+    main_base = new base( 0, 0 );
 
     bgm.play();
     bgm.setVolume( 0.1 );
@@ -480,4 +479,6 @@ function draw()
             current_screen = game_screen;
         }
     }
+
+    mouseWasPressed = mouseIsPressed;
 }

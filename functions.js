@@ -6,28 +6,11 @@
 // player shooting laser
 function player_blastLaser()
 {
-    if ( player_upgrade.includes( 1 ) )
+    if ( current_screen == game_screen )
     {
         player_laser.push( new laser( player, player.fireDmg ) );
-        player_laser.push( new laser( player, player.fireDmg ) );
-
-        for ( let i = 0; i < player_laser.length; i++ )
-        {
-            if ( i % 2 == 0 )
-            {
-                player_laser[ i ].position.x += 10;
-            }
-            else if ( i % 2 == 1 )
-            {
-                player_laser[ i ].position.y -= 20;
-            }
-        }
-    }
-    else
-        player_laser.push( new laser( player, player.fireDmg ) );
-
-    if(current_screen == game_screen)
         laser_sound.play();
+    }
 }
 
 // enemies shooting laser
@@ -36,7 +19,7 @@ function enemy_blastLaser( shooter )
     enemy_laser.push( new laser( enemy[ shooter ], enemy[ shooter ].fireDmg ) );
 }
 
-// enemy attacking each 3 seconds
+// enemies attacking
 function enemy_attack()
 {
     let enemy_fire = 3000;
@@ -45,33 +28,56 @@ function enemy_attack()
         if ( enemy[ i ].shooting_laser == false )
         {
             enemy[ i ].shooting_laser = true;
-            enemy_blastLaser(i);
+            enemy_blastLaser( i );
             setTimeout( function ()
             {
-                enemy[ i ].shooting_laser = false;
+                if ( enemy.length > i )
+                {
+                    enemy[ i ].shooting_laser = false;
+                }
             }, enemy_fire );
         }
     }
 }
 
-// upgrade 3 : if mouse left button pressed, shoot missile
-// upgrade 4 : if mouse middle button pressed, shock wave
+// upgrade 3 : if keyboard space key pressed, shoot missile
+
 let missile_fired = false;
-let shockwave_used = false;
 
 function keyPressed()
 {
     let fireRate = 1000;
-    
-    if ( keyCode == 32 )
+    let closest_enemy;
+    let min_distance;
+    let dir = 0;
+
+    if ( keyCode == 32 && 0 in enemy )
     {
         if ( player_upgrade.includes( 3 ) && current_screen == game_screen )
         {
+            for ( let i = 0; i < enemy.length; i++ )
+            {
+                let distance = sqrt( ( enemy[ i ].position.x - player.position.x ) * ( enemy[ i ].position.x - player
+                    .position.x ) + ( enemy[ i ].position.y - player.position.y ) * ( enemy[ i ].position.y -
+                    player.position.y ) );
+                if ( i == 0 )
+                    min_distance = distance;
+                if ( min_distance > distance )
+                {
+                    min_distance = distance;
+                    closest_enemy = i;
+                }
+            }
+
+            console.log( closest_enemy );
+            dir = atan2( enemy[ closest_enemy ].position.y - player.position.y, enemy[ closest_enemy ].position.x -
+                player.position.x );
+
             if ( missile_fired == false )
             {
                 setTimeout( function ()
                 {
-                    player_laser.push( new missile( player, player.fireDmg ) );
+                    player_laser.push( new missile( player, player.fireDmg, dir ) );
                     missile_fired = true;
                 }, 0 );
                 setTimeout( function ()
@@ -85,17 +91,20 @@ function keyPressed()
 
 function keyReleased()
 {
-    
+
 }
 
 
 // if mouse left button pressed, shoot laser
+// upgrade 4 : if mouse middle button pressed, shock wave
+
 let fired = false;
+let shockwave_used = false;
 
 function mousePressed()
 {
     let fireDelay = 1000 / player.fireRate;
-    let shockwave_delay = 20000;
+    let shockwave_delay = 10;
 
     if ( mouseButton === LEFT && current_screen == game_screen )
     {
@@ -115,7 +124,7 @@ function mousePressed()
     {
         if ( player_upgrade.includes( 4 ) && current_screen == game_screen )
         {
-            if ( 1 )
+            if ( shockwave_used == false )
             {
                 setTimeout( function ()
                 {
@@ -144,15 +153,33 @@ function mouseReleased()
 // upgrade 4 : Shock Wave
 function shock_wave()
 {
-    for(let i = 0 ; i < enemy.length ; i ++)
+    for ( let i = 0; i < enemy.length; i++ )
     {
-        const distance = sqrt( ( player.position.x - enemy[i].position.x ) * ( player.position.x - enemy[i].position.x ) + (
-            player.position.y - enemy[i].position.y ) * ( player.position.y - enemy[i].position.y ) );
-        if(distance <= 500)
+        const distance = sqrt( ( player.position.x - enemy[ i ].position.x ) * ( player.position.x - enemy[ i ].position
+            .x ) + (
+            player.position.y - enemy[ i ].position.y ) * ( player.position.y - enemy[ i ].position.y ) );
+        if ( distance <= 700 )
         {
-            enemy[i].hp -= player.fireDmg * 3;
+            enemy[ i ].hp -= player.fireDmg * 3;
         }
     }
+
+    for ( let i = 0; i < enemy_laser.length; i++ )
+    {
+        const distance = sqrt( ( player.position.x - enemy_laser[ i ].position.x ) * ( player.position.x - enemy_laser[
+            i ].position.x ) + (
+            player.position.y - enemy_laser[ i ].position.y ) * ( player.position.y - enemy_laser[ i ].position
+            .y ) );
+        if ( distance <= 700 )
+        {
+            enemy_laser.splice( i, 1 );
+        }
+    }
+}
+
+function shock_wave_effect()
+{
+
 }
 
 // entering shop
@@ -171,11 +198,15 @@ function upgrade()
 {
     player.max_hp = 100 + 150 * hp_level;
 
-    // upgrade 7
+    // upgrade 7 : HP up
     if ( player_upgrade.includes( 7 ) )
         player.max_hp *= 2;
 
     player.fireDmg = 30 + 25 * dmg_level;
+
+    // upgrade 1 : Damage up
+    if ( player_upgrade.includes( 1 ) )
+        player.fireDmg *= 1.3;
 
     // upgrade 5
     if ( player_upgrade.includes( 5 ) && current_screen == game_screen )
@@ -186,6 +217,7 @@ function upgrade()
         else
             player.fireDmg = 30 + 25 * dmg_level;
     }
+
     player.fireRate = 3 + 0.7 * fire_rate_level;
 
     // upgrade 6
@@ -219,7 +251,7 @@ function level_up()
     player.max_exp += 30;
     player.acceleration.setLength( 0 );
 
-    // upgrade player evert 3 levels
+    // upgrade player every 3 levels
     if ( player.level % 3 == 0 && 0 in upgrade_list )
     {
         // set two upgrade options
