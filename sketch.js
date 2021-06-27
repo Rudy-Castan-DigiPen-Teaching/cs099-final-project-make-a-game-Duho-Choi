@@ -4,7 +4,7 @@
 // Spring 2021
 
 // current screen
-let current_screen = 10;
+let current_screen = 0;
 
 // camera
 let player_camera;
