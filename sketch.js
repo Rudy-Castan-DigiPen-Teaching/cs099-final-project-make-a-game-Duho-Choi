@@ -127,7 +127,7 @@ function draw()
             width / 5.8, height / 5 );
         image( keyboard_img, width * 1.85 / 3, height / 4, 220 );
         text( "You can control your spaceship with keyboard", width * 2.35 / 4, height / 5 );
-        text( "W,A,D and SpaceKey.\nThrust with W,\nTurn left / right with A / D,\nand shoot laser with Space key.",
+        text( "W,A and D.\nThrust with W,\nTurn left / right with A / D.",
             width * 2.85 / 4, height / 4.3 );
         push();
         translate( width / 2.2, height / 2.7 );
