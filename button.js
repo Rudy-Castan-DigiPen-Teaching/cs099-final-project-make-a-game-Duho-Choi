@@ -145,7 +145,7 @@ class button
             textSize( 50 );
             text( "Shock Wave", this.x, this.y - 30 );
             textSize( 22 );
-            text( "When keyboard space button\nclicked, use shock wave\ndamages all nearby enemies\nShock wave has 3X Damage\nof your laser damage\n(Cooldown : 20 sec)",
+            text( "When keyboard space button\nclicked, use shock wave\ndamages all nearby enemies\nShock wave has 3X Damage\nof your laser damage\n(Cooldown : 15 sec)",
                 this.x, this.y + 55 );
             pop();
 

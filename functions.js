@@ -42,10 +42,11 @@ function enemy_attack()
 
 // upgrade 3 : if keyboard space key pressed, shock wave
 let shockwave_used = false;
+let shockwave_effect = false;
 
 function keyPressed()
 {
-    let shockwave_delay = 10;
+    let shockwave_delay = 15000;
 
     if ( keyCode == 32 )
     {
@@ -55,6 +56,11 @@ function keyPressed()
             {
                 shock_wave();
                 shockwave_used = true;
+                shockwave_effect = true;
+                setTimeout( function ()
+                {
+                    shockwave_effect = false;
+                }, 800 );
                 setTimeout( function ()
                 {
                     shockwave_used = false

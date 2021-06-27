@@ -309,6 +309,19 @@ function draw()
         // draw player
         player.draw();
 
+        // update 4, when shockwave used, draw shockwave
+        if(keyIsPressed)
+        {
+            if ( player_upgrade.includes( 4 ) && current_screen == game_screen && shockwave_effect == true )
+            {
+                push();
+                noStroke();
+                fill(50,200,255,50);
+                circle(player.position.x,player.position.y,1400);
+                pop();
+            }
+        }
+
         // upgrade 8, update & draw guard
         if ( player_upgrade.includes( 8 ) )
         {
