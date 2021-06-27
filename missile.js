@@ -11,7 +11,7 @@ class missile
         this.velocity = new Vec2( shooter.velocity.x, shooter.velocity.y );
         this.accel = new Vec2( 0.7, 0 );
         this.team = shooter.team;
-        this.dmg = damage * 2.5;
+        this.dmg = damage * 2;
         this.direction = dir;
         this.collide = false;
     }

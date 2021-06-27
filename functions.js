@@ -163,23 +163,11 @@ function shock_wave()
             enemy[ i ].hp -= player.fireDmg * 3;
         }
     }
-
-    for ( let i = 0; i < enemy_laser.length; i++ )
-    {
-        const distance = sqrt( ( player.position.x - enemy_laser[ i ].position.x ) * ( player.position.x - enemy_laser[
-            i ].position.x ) + (
-            player.position.y - enemy_laser[ i ].position.y ) * ( player.position.y - enemy_laser[ i ].position
-            .y ) );
-        if ( distance <= 700 )
-        {
-            enemy_laser.splice( i, 1 );
-        }
-    }
 }
 
 function shock_wave_effect()
 {
-
+    
 }
 
 // entering shop

@@ -126,7 +126,7 @@ class button
             textSize( 45 );
             text( "Missile Turret", this.x, this.y - 30 );
             textSize( 22 );
-            text( "Shooting missile when\nspace key button is pressed\nMissile has 2.5X damage\nof your laser damage\n(Cooldown : 1 second)",
+            text( "Shooting missile when\nspace key button is pressed\nMissile has 2X damage\nof your laser damage\n(Cooldown : 1 second)",
                 this.x, this.y + 90 );
             pop();
 
@@ -145,7 +145,7 @@ class button
             textSize( 50 );
             text( "Shock Wave", this.x, this.y - 30 );
             textSize( 22 );
-            text( "When mouse middle button\nclicked, use shock wave\nDamages all nearby enemies\nand deletes all nearby\nenemy lasers\nShock wave has 3X Damage\nof your laser\n(Cooldown : 20 sec)",
+            text( "When mouse middle button\nclicked, use shock wave\ndamages all nearby enemies\nShock wave has 3X Damage\nof your laser damage\n(Cooldown : 20 sec)",
                 this.x, this.y + 55 );
             pop();
 

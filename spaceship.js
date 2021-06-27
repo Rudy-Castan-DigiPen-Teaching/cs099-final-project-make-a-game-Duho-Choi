@@ -46,7 +46,7 @@ class spaceship
 
         this.armor = 0;
 
-        this.speed_max = 5;
+        this.speed_max = 3;
         this.angleOffset = 0.1;
         this.accel = 0.5;
 
@@ -244,7 +244,7 @@ class spaceship
 
     reward( p )
     {
-        p.coin += this.level * 10;
+        p.coin += this.level * 15;
         p.exp += this.level * 20;
     }
 }

@@ -229,7 +229,6 @@ function draw()
             {
                 enemy[ i ].update();
                 enemy[ i ].draw();
-                enemy[ i ].speed_max = player.speed_max * 2 / 3;
                 if ( enemy[ i ].hp < enemy[ i ].max_hp )
                     enemy[ i ].draw_hp();
             }
