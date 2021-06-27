@@ -75,7 +75,7 @@ function draw()
     // keep playing bgm
     if ( bgm_playing == false )
     {
-        //bgm.play();
+        bgm.play();
         bgm_playing = true;
         setInterval( function ()
         {
