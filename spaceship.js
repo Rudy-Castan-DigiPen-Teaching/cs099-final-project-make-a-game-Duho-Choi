@@ -34,7 +34,7 @@ class spaceship
         this.level = lev;
         this.exp = 0;
         this.max_exp = 30;
-        this.coin = 100000;
+        this.coin = 0;
 
         this.max_hp = 50 + lev * 40;
         this.hp = this.max_hp;
