@@ -28,10 +28,13 @@ There are three buttons; Start, Options, and Credits. When clicking start button
 
 ### Help screen
 
+### Credits screen
+Just simply wrote contributors of this game (almost myself, but there's others who helped me to make this game, and I brought almost all of assets in website, so I wrote all of authors of them).
+
 ## Game screen
 In the game screen, there's three noticeable user interfaces that shows some resources in this game: Health Point(HP), Coin, Level and Experience Point. Player can move spaceship with keyboard W,A and D; move forward with W, turn left and right with A and D. Enemies keep spawning permanently if the number of enemy doesn't get over max limit of it. 
 
-### Base screen (Shop screen)
+### Base screen (Shop screen) & Level Up screen
 
 ### Level Up screen
 
