@@ -5,20 +5,20 @@
 
 class missile
 {
-    constructor( shooter, damage, dir = 0 )
+    constructor( shooter, damage )
     {
         this.position = new Vec2( shooter.position.x, shooter.position.y );
         this.velocity = new Vec2( shooter.velocity.x, shooter.velocity.y );
-        this.accel = new Vec2( 0.7, 0 );
+        this.accel = new Vec2( 0.5, 0 );
         this.team = shooter.team;
         this.dmg = damage * 2;
-        this.direction = dir;
+        this.dir = atan2( mouseY - 450, mouseX - 600 );
         this.collide = false;
     }
 
     update()
     {
-        this.velocity.setAngle( this.direction );
+        this.velocity.setAngle( this.dir );
         this.velocity.setLength( this.accel.getLength() + this.velocity.getLength() );
         this.position.addTo( this.velocity );
 

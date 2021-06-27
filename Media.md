@@ -48,7 +48,7 @@ Under the following terms:
 Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
 
 
-## Barrier.png, Critical.png, DoubleShot.png, HeavyArmor.png, HPup.png : 
+## Barrier.png, Critical.png, AtkUp.png, HeavyArmor.png, HPup.png : 
 These are all drawn by me (Duho Choi) with using Pixel Studio for pixel art.
 
 ---
@@ -72,6 +72,9 @@ You can copy, modify, distribute and perform the work, even for commercial purpo
 
 ## laser4.wav
 Get it from https://opengameart.org/content/laser-fire, made by dklon.
+
+## flaunch.wav
+Get it from https://opengameart.org/content/4-projectile-launches, made by Michel Baradari.
 
 
 ### These follows CC-BY 3.0 license.

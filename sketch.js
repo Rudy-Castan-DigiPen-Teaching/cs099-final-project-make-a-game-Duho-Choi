@@ -18,12 +18,16 @@ let player_laser = [];
 let player_guard;
 let enemy = [];
 let enemy_laser = [];
+let enemy_level = 1;
 let max_enemy = 3;
 
 // shop
 let main_base;
 
 let blast_interval;
+let missile_interval;
+
+let bgm_playing = false;
 
 function setup()
 {
@@ -60,14 +64,24 @@ function setup()
     // base
     main_base = new base( 0, 0 );
 
-    bgm.play();
     bgm.setVolume( 0.1 );
     laser_sound.setVolume( 0.1 );
+    missile_sound.setVolume( 0.1 );
 }
 
 function draw()
 {
     background( 20 );
+    // keep playing bgm
+    if(bgm_playing == false)
+    {  
+        bgm.play();
+        bgm_playing = true;
+        setInterval(function()
+        {
+            bgm_playing = false;
+        },110000);
+    }
 
     switch ( current_screen )
     {
@@ -82,17 +96,17 @@ function draw()
 
         // draw buttons
         start_button.draw( "START" );
-        options_button.draw( "OPTIONS" );
+        options_button.draw( "HOW TO PLAY" );
         credits_button.draw( "CREDITS" );
 
         // change screens when button clicked
         if ( start_button.clicked() )
         {
-            current_screen = help_screen;
+            current_screen = game_screen;
         }
         else if ( options_button.clicked() )
         {
-            current_screen = options_screen;
+            current_screen = help_screen;
         }
         else if ( credits_button.clicked() )
         {
@@ -149,25 +163,6 @@ function draw()
 
         break;
 
-        // options screen
-    case options_screen:
-
-        // background image
-        push();
-        imageMode( CENTER );
-        image( background_img, width / 2, height / 2, width, height );
-        pop();
-
-        // text box
-        push();
-        rectMode( CENTER );
-        noStroke();
-        fill( 0, 200 );
-        rect( width / 2, height / 2 + 30, width * 9 / 10, height * 4 / 5, 50 );
-        pop();
-
-        break;
-
         // credits screen
     case credits_screen:
 
@@ -186,7 +181,7 @@ function draw()
         textAlign( LEFT, TOP );
         fill( 255 );
         textSize( 35 );
-        text( "Director : Duho Choi\nLead Programmer : Duho Choi\nAnd everything else except assets : Duho Choi\n\nDesigneers :\nImages by : Rawdanitsu, kotnaszynce, Kenney, Rallix,\nMillionthVector, Prinsu-Kun\nSounds by : celestialghost8, dklon\n(Assets brought from opengameart.org)\n\nSpecial thanks to : Our professor Rudy Castan, and all of\nour classmates and friends",
+        text( "Director : Duho Choi\nLead Programmer : Duho Choi\nAnd everything else except some assets : Duho Choi\n\nDesigneers :\nImages by : Rawdanitsu, kotnaszynce, Kenney, Rallix,\nMillionthVector, Prinsu-Kun\nSounds by : celestialghost8, dklon, Michel Baradari\n(Assets brought from opengameart.org)\n\nSpecial thanks to : Our professor Rudy Castan, and all of\nour classmates and friends",
             width / 9, height / 5 );
         pop();
 
@@ -198,7 +193,7 @@ function draw()
         // if player.hp < 0, game over
         if ( player.hp <= 0 )
         {
-            //current_screen = game_over_screen;
+            current_screen = game_over_screen;
         }
 
         player_camera.x = player.position.x - width / 2;
@@ -222,7 +217,9 @@ function draw()
         // spawn enemies
         setTimeout( spawn_enemy, 3000 );
 
-        // update enemies
+        // update & upgrade enemies
+        enemy_upgrade();
+        
         for ( let i = 0; i < enemy.length; i++ )
         {
             if ( enemy[ i ].hp > 0 )
@@ -455,11 +452,22 @@ function draw()
 
     case game_over_screen:
 
+        push();
+
+        fill(150);
+        stroke(130,0,0);
+        textSize(100);
+        textAlign(CENTER,TOP);
+        text("Game Over!",width/2,height/3);
+        textSize(60);
+        text("You have caught to the empire\nand sentenced to life in prison.",width/2,height * 2/3);
+
+        pop();
     }
 
-    // if current screen is help screen, options screen or credits screen, 
+    // if current screen is help screen or credits screen, 
     // draw return main menu button
-    if ( current_screen >= help_screen )
+    if ( current_screen >= help_screen && current_screen != game_over_screen )
     {
         return_main_button.draw( '◁' );
         if ( return_main_button.clicked() )
@@ -470,7 +478,7 @@ function draw()
 
     // if current screen is shop screen,
     // draw return game button
-    else if ( current_screen > game_screen && current_screen != level_up_screen )
+    else if ( current_screen > game_screen && current_screen != level_up_screen && current_screen != game_over_screen )
     {
         return_game_button.draw( '◁' );
         if ( return_game_button.clicked() )

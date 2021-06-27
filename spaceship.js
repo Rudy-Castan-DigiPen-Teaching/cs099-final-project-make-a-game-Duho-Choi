@@ -36,8 +36,8 @@ class spaceship
         this.max_exp = 30;
         this.coin = 100000;
 
-        this.hp = 50;
-        this.max_hp = 50;
+        this.max_hp = 50 + lev * 40;
+        this.hp = this.max_hp;
 
         this.fireDmg = 3;
         this.fireRate = 2;
@@ -66,7 +66,7 @@ class spaceship
         {
             this.velocity.setLength( 0.01 );
         }
-
+        
         // moving player
         if ( this.team == 0 && current_screen == game_screen )
         {
@@ -207,10 +207,14 @@ class spaceship
         textAlign( LEFT, CENTER );
         textSize( 20 );
         text( "X : " + int( this.position.x ) + "  Y : " + int( this.position.y ), width * 4 / 5, 20 );
+
+        /*
+        // times survived
+        text("Times survived : " + second(), width * 3 / 5, 20);
         pop();
+        */
         
         // aiming point
-
         push();
         stroke( "#00F3FF" );
         noFill();
@@ -221,9 +225,6 @@ class spaceship
         line(0,20,0,-20);
         pop();
 
-        // missile delay
-
-        // shockwave delay
     }
 
     IsHitByLaser( laser )

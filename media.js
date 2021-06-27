@@ -18,7 +18,7 @@ let game_background_img;
 // sounds
 let bgm;
 let laser_sound;
-let levelup_sound;
+let missile_sound;
 
 function preload()
 {
@@ -30,7 +30,7 @@ function preload()
     coin_img = loadImage( 'assets/coin.png' );
     boost_img = loadImage( 'assets/boost_flame.png' );
     enemy_boost_img = loadImage( 'assets/enemy_boost_flame.png' );
-    upgrade_img[ 0 ] = loadImage( 'assets/DoubleShot.png' );
+    upgrade_img[ 0 ] = loadImage( 'assets/AtkUp.png' );
     upgrade_img[ 1 ] = loadImage( 'assets/Barrier.png' );
     upgrade_img[ 2 ] = loadImage( 'assets/playerMissile.png' );
     upgrade_img[ 4 ] = loadImage( 'assets/Critical.png' );
@@ -44,4 +44,5 @@ function preload()
     // sound
     bgm = loadSound( 'assets/bgm.mp3' );
     laser_sound = loadSound( 'assets/laser4.wav' );
+    missile_sound = loadSound( 'assets/flaunch.wav' );
 }

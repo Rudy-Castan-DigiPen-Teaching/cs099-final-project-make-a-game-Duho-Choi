@@ -40,50 +40,25 @@ function enemy_attack()
     }
 }
 
-// upgrade 3 : if keyboard space key pressed, shoot missile
-
-let missile_fired = false;
+// upgrade 3 : if keyboard space key pressed, shock wave
+let shockwave_used = false;
 
 function keyPressed()
 {
-    let fireRate = 1000;
-    let closest_enemy;
-    let min_distance;
-    let dir = 0;
+    let shockwave_delay = 10;
 
-    if ( keyCode == 32 && 0 in enemy )
+    if ( keyCode == 32 )
     {
-        if ( player_upgrade.includes( 3 ) && current_screen == game_screen )
+        if ( player_upgrade.includes( 4 ) && current_screen == game_screen )
         {
-            for ( let i = 0; i < enemy.length; i++ )
+            if ( shockwave_used == false )
             {
-                let distance = sqrt( ( enemy[ i ].position.x - player.position.x ) * ( enemy[ i ].position.x - player
-                    .position.x ) + ( enemy[ i ].position.y - player.position.y ) * ( enemy[ i ].position.y -
-                    player.position.y ) );
-                if ( i == 0 )
-                    min_distance = distance;
-                if ( min_distance > distance )
-                {
-                    min_distance = distance;
-                    closest_enemy = i;
-                }
-            }
-
-            console.log( closest_enemy );
-            dir = atan2( enemy[ closest_enemy ].position.y - player.position.y, enemy[ closest_enemy ].position.x -
-                player.position.x );
-
-            if ( missile_fired == false )
-            {
+                shock_wave();
+                shockwave_used = true;
                 setTimeout( function ()
                 {
-                    player_laser.push( new missile( player, player.fireDmg, dir ) );
-                    missile_fired = true;
-                }, 0 );
-                setTimeout( function ()
-                {
-                    missile_fired = false
-                }, fireRate );
+                    shockwave_used = false
+                }, shockwave_delay );
             }
         }
     }
@@ -94,59 +69,65 @@ function keyReleased()
 
 }
 
-
 // if mouse left button pressed, shoot laser
-// upgrade 4 : if mouse middle button pressed, shock wave
+// upgrade 4 :shoot missile with lasers
 
 let fired = false;
-let shockwave_used = false;
+let missile_fired = false;
 
 function mousePressed()
 {
     let fireDelay = 1000 / player.fireRate;
-    let shockwave_delay = 10;
 
     if ( mouseButton === LEFT && current_screen == game_screen )
     {
         if ( fired == false )
         {
             fired = true;
-            setTimeout( player_blastLaser, 0 );
+            player_blastLaser();
             blast_interval = setInterval( player_blastLaser, fireDelay );
             setTimeout( function ()
             {
-                fired = false
+                fired = false;
             }, fireDelay );
         }
     }
 
-    if ( mouseButton === CENTER )
+    let missileDelay = 1000;
+
+    if ( mouseButton === LEFT && player_upgrade.includes( 3 ) && current_screen == game_screen )
     {
-        if ( player_upgrade.includes( 4 ) && current_screen == game_screen )
+        if ( missile_fired == false )
         {
-            if ( shockwave_used == false )
+            missile_fired = true;
+            player_laser.push( new missile( player, player.fireDmg ) );
+            missile_sound.play();
+
+            missile_interval = setInterval( function ()
             {
-                setTimeout( function ()
+                if ( current_screen == game_screen )
                 {
-                    shock_wave();
-                    shockwave_used = true;
-                }, 0 );
-                setTimeout( function ()
-                {
-                    shockwave_used = false
-                }, shockwave_delay );
-            }
+                    player_laser.push( new missile( player, player.fireDmg ) );
+                    missile_sound.play();
+                }
+            }, missileDelay );
+
+            setTimeout( function ()
+            {
+                missile_fired = false
+            }, missileDelay );
         }
     }
 }
 
-// release mouse left = stop shooting laser
+// release mouse left = stop shooting laser & missile
 function mouseReleased()
 {
     mouseWasPressed = false;
     if ( mouseButton === LEFT || mouseButton === RIGHT )
     {
         clearInterval( blast_interval );
+        clearInterval( missile_interval );
     }
 }
 
@@ -167,7 +148,7 @@ function shock_wave()
 
 function shock_wave_effect()
 {
-    
+
 }
 
 // entering shop
@@ -225,7 +206,15 @@ function upgrade()
 // upgrade enemies
 function enemy_upgrade()
 {
-
+    for(let i = 0 ; i < enemy.length ; i++)
+    {
+        enemy[i].level = 1 + int(player.level / 3);
+        if(i == 0)
+            enemy_level = enemy[i].level;
+        enemy[i].fireDmg = 4 + enemy[i].level * 3;
+        enemy[i].max_hp = 50 + enemy[i].level * 40;
+        enemy[i].speed_max = 3 + enemy[i].level * 1;
+    }
 }
 
 // level up
@@ -274,7 +263,7 @@ function spawn_enemy()
     let position_y = int( y_pos * sqrt( 2000 * 2000 - position_x * position_x ) );
 
     if ( enemy.length < max_enemy )
-        enemy.push( new spaceship( position_x, position_y, 30, 1 ) );
+        enemy.push( new spaceship( position_x, position_y, 30, enemy_level ) );
 }
 
 // enemies heading to player
