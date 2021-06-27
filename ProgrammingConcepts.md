@@ -199,7 +199,7 @@ from sketch.js
 ---
 ## What is it?
 ---
-Functions are kinda like aggregation of codes. We can easily use combined codes by just using a function. And it is useful to make 
+Functions are kinda like aggregation of codes. We can easily use combined codes by just using a function. And it is useful to make our code more readable.
 
 ## Why is it important? 
 ---
@@ -207,26 +207,72 @@ When we make functions, it can perform same bundle of codes multiple times by ju
 
 ## How do we use it?
 ---
-If we need to 
-
+If we need to use same code lots of times, we can make function and use it so then we can use bundle of codes easily. Or not only that, we could use functions when we need to make our code more simple.
 
 ### Code snippet
 ---
+I have lots of functions in my game. This is the function that upgrades player.
+
+```js
+from functions.js
+
+function upgrade()
+{
+    player.max_hp = 100 + 150 * hp_level;
+
+    // upgrade 7 : HP up
+    if ( player_upgrade.includes( 7 ) )
+        player.max_hp *= 2;
+
+    player.fireDmg = 30 + 25 * dmg_level;
+
+    // upgrade 1 : Damage up
+    if ( player_upgrade.includes( 1 ) )
+        player.fireDmg *= 1.3;
+
+    // upgrade 5
+    if ( player_upgrade.includes( 5 ) && current_screen == game_screen )
+    {
+        let crit = random( 10 );
+        if ( crit >= 7 )
+            player.fireDmg *= 2;
+        else
+            player.fireDmg = 30 + 25 * dmg_level;
+    }
+
+    player.fireRate = 3 + 0.7 * fire_rate_level;
+
+    // upgrade 6
+    player.speed_max = 5 + 1 * spd_level;
+    if ( player_upgrade.includes( 6 ) )
+        player.speed_max -= 3;
+
+    // upgrade 2
+    if ( player_upgrade.includes( 2 ) && barrier_on == true && current_screen == game_screen )
+        player.armor = 100
+    else
+        player.armor = 5 * armor_level;
+    if ( player_upgrade.includes( 6 ) && barrier_on == false )
+        player.armor += 20;
+}
+
+
+```
 
 
 # 7. Classes
 
 ## What is it?
 ---
-In Classes, there are 
-
+Class is combinations of variables and functions. In class, it has variables for that class in it, and there are functions that uses variables we put when making class (I searched in google, and people call them method).
 
 ## Why is it important? 
 ---
-
+In game, there are bunch of objects, and each objects has variables that saves their information. And each objects need some methods to make them do their behaviors such as moving, attacking, and we can put all of that kinds of works in one class so that we can make same kinds of classes and make to do same kinds of behaviors.
 
 ## How do we use it?
 ---
+We can make classes for objects, and make methods for them to make move, attack, and other behaviors.
 
 ### Code snippet
 ---
@@ -469,15 +515,15 @@ class spaceship
 
 ## What is it?
 ---
-Array is an aggregation of data. It can be various types of set of data, but usually we use with same or similar type of data.
+Array is an aggregation of variables. It can be various types of set of data, but usually we use with same or similar type of data.
 
 ## Why is it important? 
 ---
-Array is useful to control similar data. Like I said before, when using array with loops, we can easily control contents in the array. 
+Array is useful to control similar data. There's kind of lots of similar data in game (such as monsters, or bullets), but since people can't make and control all of them in game manually, so we can make similar or same data and control all of them by putting in arrays.
 
 ## How do we use it?
 ---
-When you need to use lots of similar data, you can put on various data on array. With using with loops, we could deal with 
+When you need to use lots of similar data, you can put on various data on array. Like I said before, when using array with loops, we can easily control contents in the array since we can access all of contents in array by simply using loops. 
 
 ### Code Snippet
 ---
