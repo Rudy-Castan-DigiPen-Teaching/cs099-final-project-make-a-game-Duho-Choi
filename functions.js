@@ -83,10 +83,10 @@ let missile_fired = false;
 
 function mousePressed()
 {
-    let fireDelay = 1000 / player.fireRate;
-
     if ( mouseButton === LEFT && current_screen == game_screen )
     {
+        let fireDelay = 1000 / player.fireRate;
+    
         if ( fired == false )
         {
             fired = true;
@@ -231,7 +231,7 @@ function level_up()
 
     player.level += 1;
     player.exp = 0;
-    player.max_exp += 30;
+    player.max_exp += 50;
     player.acceleration.setLength( 0 );
 
     // upgrade player every 3 levels
