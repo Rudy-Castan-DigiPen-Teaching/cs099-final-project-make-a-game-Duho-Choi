@@ -143,15 +143,28 @@ function draw()
         text( "You can control your spaceship with keyboard", width * 2.35 / 4, height / 5 );
         text( "W,A and D.\nThrust with W,\nTurn left / right with A / D.",
             width * 2.85 / 4, height / 4.3 );
+        text( "You can shoot laser and\nkill enemies with mouse\nleft button.",
+            width * 2.85 / 4, height / 4.3 + 130 );
+        image( mouse_img, width * 1.9 / 3, height / 4 + 150, 70, 90 );
+
         push();
         translate( width / 2.2, height / 2.7 );
         rotate( PI );
         image( enemy_spaceship_img, 0, 0, 110, 110 );
         pop();
+
+        image( base_img, width * 1.9 / 3, height / 4 + 430, 170, 200 );
+        image( coin_img, width * 1.9 / 3 + 170, height / 4 + 400, 180, 180 );
         text( "▷ That's enemy spaceship. It will keep\nfollowing you and blasting lasers. You have\nto shoot and kill them with your laser!",
             width / 15, height / 3 );
+        text( "When killing enemies, you can get coins and exp.\nWhen you get enough exp, you can level up and freely\nheal a part of your HP. Every time you level up\nthree times, you can choose one of\ntwo random special skills.",
+        width / 15, height / 3 + 150);
+        image( UI_img, width / 15 + 200, height / 3 + 370);
         text( "This is your base. You can get to your base\nand upgrade your ship's ability whenever you want.\nYou need to pay coins when upgrading your ship",
             width / 2, height / 2 );
+        textSize(30);
+        text( "That's end of instruction. Good luck!",
+                width / 2, height / 2 + 340 );
         pop();
 
         // game play button

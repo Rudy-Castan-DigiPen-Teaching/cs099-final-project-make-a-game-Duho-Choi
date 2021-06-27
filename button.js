@@ -140,7 +140,7 @@ class button
             noStroke();
             fill( 0 );
             imageMode( CENTER );
-            image( upgrade_img[ 2 ], this.x, this.y - 160, 200, 200 );
+            image( upgrade_img[ 3 ], this.x, this.y - 160, 200, 200 );
             textAlign( CENTER, TOP );
             textSize( 50 );
             text( "Shock Wave", this.x, this.y - 30 );

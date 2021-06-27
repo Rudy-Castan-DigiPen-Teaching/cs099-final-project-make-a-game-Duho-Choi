@@ -15,6 +15,7 @@ let coin_img;
 let upgrade_img = [];
 let background_img;
 let game_background_img;
+let UI_img;
 
 // sounds
 let bgm;
@@ -25,12 +26,14 @@ function preload()
 {
     // images
     keyboard_img = loadImage( 'assets/keyboard_keys.png' );
+    mouse_img = loadImage( 'assets/mouse.png' )
     player_spaceship_img = loadImage( 'assets/spaceship_player.png' );
     enemy_spaceship_img = loadImage( 'assets/spaceship_enemy.png' );
     base_img = loadImage( 'assets/station.png' );
     coin_img = loadImage( 'assets/coin.png' );
     boost_img = loadImage( 'assets/boost_flame.png' );
     enemy_boost_img = loadImage( 'assets/enemy_boost_flame.png' );
+    UI_img = loadImage( 'assets/UI.PNG' );
     upgrade_img[ 0 ] = loadImage( 'assets/AtkUp.png' );
     upgrade_img[ 1 ] = loadImage( 'assets/Barrier.png' );
     upgrade_img[ 2 ] = loadImage( 'assets/playerMissile.png' );
